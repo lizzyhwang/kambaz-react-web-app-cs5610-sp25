@@ -3,7 +3,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Welcome to Web Dev!</h1>
+        <h1>Welcome to Full Stack MERN App!</h1>
       </div>
     </>
   )
