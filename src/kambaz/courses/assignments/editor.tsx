@@ -112,7 +112,7 @@ export default function AssignmentEditor() {
         </tr>
       </table >
       <hr />
-      <div>
+      <div align="right">
         <button type="button"
           id="wd-cancel">
           Cancel
