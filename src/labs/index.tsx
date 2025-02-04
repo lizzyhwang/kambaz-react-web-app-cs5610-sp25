@@ -7,6 +7,7 @@ import Lab3 from "./lab3"
 export default function Labs() {
   return (
     <div>
+      <h1>Welcome to Web Dev</h1>
       <h1>Elizabeth Hwang</h1>
       <TOC />
       <Routes>

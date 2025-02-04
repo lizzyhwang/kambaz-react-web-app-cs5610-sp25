@@ -35,7 +35,7 @@ export default function Lab2() {
 
       <div id="wd-css-id-selectors">
         <h3>ID selectors</h3>
-        <p id="wd-id-selector-1">
+        <p id="wd-id-selector-1" className="wd-class-selector">
           Instead of changing the look and feel of all the
           elements of the same name, e.g., P, we can refer to a specific element by its ID
         </p>
