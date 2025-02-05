@@ -53,3 +53,7 @@ body * {
 .wd-text-bold {
   font-weight: bold;
 }
+
+.wd-padding-right-30px {
+  padding-right: 30px;
+}
