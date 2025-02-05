@@ -204,7 +204,7 @@ export default function Lab1() {
           <label htmlFor="wd-radio-fantasy">Fantasy</label><br />
 
           <input type="radio" name="radio-genre" id="wd-radio-horror" />
-          <label htmlFor="wd-radio-fantasy">Horror</label>
+          <label htmlFor="wd-radio-horror">Horror</label>
 
           <h5 id="wd-checkboxes">Checkboxes</h5>
           <label>Favorite movie genre:</label><br />
