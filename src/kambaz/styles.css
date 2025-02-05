@@ -35,9 +35,21 @@ body * {
 }
 
 .wd-lesson {
-  border-left: 3px solid green !important;
+  border-left: 4px solid green !important;
 }
 
 .wd-assignment-list-item {
-  border-left: 3px solid green !important;
+  border-left: 4px solid green !important;
+}
+
+.wd-assignment-description {
+  font-size: 1em;
+}
+
+.wd-fg-red {
+  color: red;
+}
+
+.wd-text-bold {
+  font-weight: bold;
 }
