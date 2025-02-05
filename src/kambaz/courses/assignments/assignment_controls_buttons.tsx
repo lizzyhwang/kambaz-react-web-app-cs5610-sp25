@@ -1,12 +1,13 @@
 import { IoEllipsisVertical } from "react-icons/io5";
-import GreenCheckmark from "./green_checkmark";
 import { PiPlus } from "react-icons/pi";
+import PercentLabel from "./percent_label";
 
-export default function ModuleControlButtons() {
+export default function AssignmentControlButtons() {
   return (
     <div className="float-end">
-      <GreenCheckmark />
+      <PercentLabel />
       <PiPlus />
       <IoEllipsisVertical className="fs-4" />
-    </div>);
+    </div >);
+
 }

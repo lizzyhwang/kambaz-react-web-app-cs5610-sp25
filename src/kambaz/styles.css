@@ -27,7 +27,7 @@ body * {
 }
 
 .bg-secondary {
-  --bs-secondary-rgb: 199, 205, 209;
+  --bs-secondary-rgb: 225, 225, 225;
 }
 
 .list-group-item {
@@ -35,5 +35,9 @@ body * {
 }
 
 .wd-lesson {
+  border-left: 3px solid green !important;
+}
+
+.wd-assignment-list-item {
   border-left: 3px solid green !important;
 }
