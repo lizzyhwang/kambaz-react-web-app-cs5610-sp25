@@ -3,7 +3,7 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 export default function AssignmentControls() {
   return (
-    <div id="wd-modules-controls" className="text-nowrap">
+    <div id="wd-assignment-controls" className="text-nowrap">
       <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn">
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Assignment
