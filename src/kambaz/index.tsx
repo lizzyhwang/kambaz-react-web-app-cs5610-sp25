@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router";
 import Account from "./account";
-import Dashboard from "./dashboard";
+import { Dashboard } from "./dashboard";
 import KambazNavigation from "./navigation";
 import Courses from "./courses";
 import "./styles.css";

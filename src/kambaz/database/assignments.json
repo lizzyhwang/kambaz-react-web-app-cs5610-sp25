@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Assignment",
+    "course": "RS101",
+    "description": "Rocketships are very cool. Build a rocket!",
+    "points": 100,
+    "due_date": "May 15, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis",
+    "course": "RS101",
+    "description": "Bust these nuts",
+    "points": 100,
+    "due_date": "May 14, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "description": "What a nozzle on that thing. Schnozzle. Ok pinnochio!",
+    "points": 70,
+    "due_date": "May 15, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A201",
+    "title": "Aerodynamics Quiz",
+    "course": "RS102",
+    "description": "Try your best! Only one attempt allowed.",
+    "points": 100,
+    "due_date": "May 22, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A202",
+    "title": "Flow Analysis",
+    "course": "RS102",
+    "description": "Go with the flow, like a surfer or a duck. Cowabunga dude!",
+    "points": 111,
+    "due_date": "May 15, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A203",
+    "title": "Heating Analysis",
+    "course": "RS102",
+    "description": "As Justin Timberlake once said, 'It's getting hot in here, so take of all your...'",
+    "points": 69,
+    "due_date": "May 15, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A301",
+    "title": "Structural Design Task",
+    "course": "RS103",
+    "description": "Structure Deez Nuts",
+    "points": 8,
+    "due_date": "May 30, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A302",
+    "title": "Orbital Calculations",
+    "course": "RS103",
+    "description": "I'll go into orbit for you.",
+    "points": 100,
+    "due_date": "May 11, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A303",
+    "title": "Systems Engineering Exam",
+    "course": "RS103",
+    "description": "I don't have a clever quip for this one. Good luck soldiers.",
+    "points": 500,
+    "due_date": "May 15, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A401",
+    "title": "Organic Chemistry Intro Quiz",
+    "course": "RS104",
+    "description": "You may only take this once. Try your best.",
+    "points": 25,
+    "due_date": "May 11, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A402",
+    "title": "That Big Red Button",
+    "course": "RS104",
+    "description": "What happens if you press it???? Investigating the science behind explosions. Submit PDF scans of lab notebook.",
+    "points": 250,
+    "due_date": "May 21, 2024, 12:00 am",
+    "available_date": "May 16, 2024, 12:00 am"
+  },
+  {
+    "_id": "A403",
+    "title": "Final Exam",
+    "course": "RS104",
+    "description": "Maybe there will be a curve. :D",
+    "points": 25,
+    "due_date": "May 31, 2024, 12:00 am",
+    "available_date": "May 26, 2024, 12:00 am"
+  },
+  {
+    "_id": "A501",
+    "title": "Inrganic Chemistry Starter Platter",
+    "course": "RS105",
+    "description": "The best and brightest need appetizers. Try your hand at these impossible (jk) questions!",
+    "points": 15,
+    "due_date": "May 11, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A502",
+    "title": "Jamie vs. Adam",
+    "course": "RS105",
+    "description": "Submit a 3-4 page paper explaining why Jamie or Adam is the better Mythbuster. Conclude with reasons why you'd be better or worse than either of them on the show.",
+    "points": 500,
+    "due_date": "May 20, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A503",
+    "title": "Busted!",
+    "course": "RS105",
+    "description": "Bust down, Tatiana",
+    "points": 420,
+    "due_date": "May 30, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A601",
+    "title": "Even more Chemistry",
+    "course": "RS106",
+    "description": "Submit a 3-4 page paper explaining why Jamie or Adam is the better Mythbuster. Conclude with reasons why you're taking this class.",
+    "points": 50,
+    "due_date": "May 20, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A701",
+    "title": "Intro to JRR Tolkien",
+    "course": "RS107",
+    "description": "Read Appendix A of Lord of the Rings, The Return of the King.",
+    "points": 100,
+    "due_date": "May 20, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  },
+  {
+    "_id": "A702",
+    "title": "Balin's Journal",
+    "course": "RS107",
+    "description": "Submit a 1-2 page journal entry written in Ancient Dwarvish, discussing the venture into the Mines of Moria as if you were part of Balin's troupe.",
+    "points": 100,
+    "due_date": "May 25, 2024, 12:00 am",
+    "available_date": "May 16, 2024, 12:00 am"
+  },
+  {
+    "_id": "A703",
+    "title": "Final Project: Invent your own language",
+    "course": "RS107",
+    "description": "Using linguistic techniques you've learned from this course, develop your own written language from Middle Earth. Explain thoroughly how it works, its pronunciation, and why this language makes sense for the species who use it.",
+    "points": 500,
+    "due_date": "May 30, 2024, 12:00 am",
+    "available_date": "May 26, 2024, 12:00 am"
+  },
+  {
+    "_id": "A801",
+    "title": "Legolas vs Gimli",
+    "course": "RS108",
+    "description": "Delve into the history of Elves and Dwarves.\nSubmit a 3-4 page paper explaining what makes Legolas and Gimli such a surprising duo.",
+    "points": 100,
+    "due_date": "May 20, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am"
+  }
+]

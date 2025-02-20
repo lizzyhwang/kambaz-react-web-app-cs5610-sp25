@@ -1,8 +1,15 @@
 import { Col, Form, FormControl, FormSelect, InputGroup, Row } from "react-bootstrap";
 import { IoCalendarOutline } from "react-icons/io5";
 import EditorControls from "./editor_controls";
+import { useParams } from "react-router-dom";
+import * as db from "../../database";
+
 
 export default function AssignmentEditor() {
+  const { aid } = useParams();
+  const assignments = db.assignments;
+  const assignment = assignments.filter((assignment: any) => assignment._id === aid)[0];
+
   return (
     <div id="wd-assignments-editor">
       <Form.Label >
@@ -10,23 +17,13 @@ export default function AssignmentEditor() {
       </Form.Label>
       <Form.Group as={Row} className="mb-3" controlId="assignmentName">
         <Col sm={10}>
-          <Form.Control type="text" value="A1 - ENV + HTML" />
+          <Form.Control type="text" value={assignment.title} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3">
         <Col sm={10}>
           <Form.Control as="textarea" style={{ height: "400px" }}
-            value="Submit a link to the landing page of your Web application running on Netlify.
-
-The landing page should be the Kambaz application with a link to the Lab exercises.
-
-Lab 1 should be the landing page of the Lab exercises and should include the following:
-
-Your full name and section
-Links to each of the lab assignments
-Link to the Kambaz application
-Links to all relevant source code repositories
-The Kambaz application should include a link to navigate back to the landing page."/>
+            value={assignment.description} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" controlId="points">
@@ -34,7 +31,7 @@ The Kambaz application should include a link to navigate back to the landing pag
           Points
         </Form.Label>
         <Col sm={6}>
-          <Form.Control type="email" value="100" />
+          <Form.Control type="email" value={assignment.points} />
         </Col>
       </Form.Group>
 
@@ -115,7 +112,7 @@ The Kambaz application should include a link to navigate back to the landing pag
                 Due
               </Form.Label>
               <InputGroup>
-                <FormControl value="May 13, 2024, 12:00 am" />
+                <FormControl value={assignment.due_date} />
                 <InputGroup.Text>
                   <IoCalendarOutline />
                 </InputGroup.Text>
@@ -128,7 +125,7 @@ The Kambaz application should include a link to navigate back to the landing pag
                   Available From
                 </Form.Label>
                 <InputGroup>
-                  <FormControl value="May 6, 2024, 12:00 am" />
+                  <FormControl value={assignment.available_date} />
                   <InputGroup.Text>
                     <IoCalendarOutline />
                   </InputGroup.Text>

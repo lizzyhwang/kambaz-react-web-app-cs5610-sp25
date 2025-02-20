@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Buy milk",
+    "status": "CANCELED",
+    "done": false
+  },
+  {
+    "title": "Pickup the kids",
+    "status": "IN PROGRESS",
+    "done": false
+  },
+  {
+    "title": "Walk the dog",
+    "status": "DEFERRED",
+    "done": false
+  },
+  {
+    "title": "Study for exam",
+    "status": "DEFERRED",
+    "done": false
+  },
+  {
+    "title": "Hit the bars",
+    "status": "IN PROGRESS",
+    "done": true
+  }
+]
