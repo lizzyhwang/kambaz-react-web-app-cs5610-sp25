@@ -1,0 +1,29 @@
+#wd-counter-up-click {
+  background-color: green !important;
+  margin-right: 5px;
+}
+
+#wd-counter-down-click {
+  background-color: red !important;
+}
+
+#wd-lab3 {
+  margin: 15px;
+}
+
+.wd-button-basic {
+  background-color: blueviolet !important;
+  margin: 5px;
+}
+
+#wd-increment-child-state-click {
+  margin: 5px;
+}
+
+#wd-counter-redux-decrement-click {
+  margin: 5px;
+}
+
+#wd-counter-redux-increment-click {
+  margin: 0px;
+}

@@ -136,7 +136,7 @@ export default function AssignmentEditor() {
                   Until
                 </Form.Label>
                 <InputGroup>
-                  <FormControl />
+                  <FormControl value={assignment.due_date} />
                   <InputGroup.Text>
                     <IoCalendarOutline />
                   </InputGroup.Text>

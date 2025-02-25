@@ -1,0 +1,19 @@
+#wd-update-todo-click {
+  background-color: #f3bf0c;
+  border: none;
+  margin: 5px;
+  color: black;
+}
+
+#wd-add-todo-click {
+  background-color: green;
+  border: none;
+}
+
+#wd-delete-todo-click {
+  background-color: red;
+}
+
+#wd-set-todo-click {
+  margin: 5px;
+}
