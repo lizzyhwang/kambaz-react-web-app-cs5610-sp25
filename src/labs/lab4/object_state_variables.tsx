@@ -2,6 +2,9 @@ import { useState } from "react";
 
 export default function ObjectStateVariable() {
   const [person, setPerson] = useState({ name: "Peter", age: 24 });
+  const handleClick = (parameter = "Hello") => {
+    console.log(parameter)
+  }
 
   return (
     <div>
@@ -19,6 +22,9 @@ export default function ObjectStateVariable() {
         })}
       />
       <hr />
+      <button onClick={() => handleClick("Hello")}>
+        Hello
+      </button>
     </div>
   );
 }
