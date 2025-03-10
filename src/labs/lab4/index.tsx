@@ -11,7 +11,6 @@ import ArrayStateVariable from "./array_state_variable";
 import ParentStateComponent from "./parent_state_component";
 import ReduxExamples from "./redux_examples";
 
-
 export default function Lab4() {
   function sayHello() {
     alert("Hello");
@@ -32,6 +31,7 @@ export default function Lab4() {
       <ArrayStateVariable />
       <ParentStateComponent />
       <ReduxExamples />
-    </div>
+
+    </div >
   );
 }
