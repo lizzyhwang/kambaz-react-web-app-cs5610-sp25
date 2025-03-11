@@ -6,16 +6,19 @@ import LessonControlButtons from "../modules/lesson_control_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import * as db from "../../database";
+import { useSelector } from "react-redux";
 
 
 export default function Assignments() {
   const { cid } = useParams();
   const assignments = db.assignments;
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const isFaculty = currentUser.role == "FACULTY";
 
   return (
     <div id="wd-assignments">
-      <AssignmentControls /> <br></br>
-
+      <AssignmentControls />
+      <br></br>
       <ListGroup className="rounded-0" id="wd-assignments">
 
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
@@ -23,7 +26,7 @@ export default function Assignments() {
             className="p-3 ps-2 bg-secondary">
             <BsGripVertical className="me-2 fs-3" />
             ASSIGNMENTS
-            <AssignmentControlButtons />
+            {isFaculty && <AssignmentControlButtons />}
           </div>
           <div>
             <ListGroup id="wd-assignment-list" className="rounded-0">
@@ -35,10 +38,12 @@ export default function Assignments() {
                     <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
                       className="text-decoration-none text-dark">
                       <div className="d-flex align-items-center">
-                        <div>
-                          <BsGripVertical className="me-2 fs-3" />
-                          <LuNotebookPen className="text-success me-3" />
-                        </div>
+                        {isFaculty &&
+                          <div>
+                            <BsGripVertical className="me-2 fs-3" />
+                            <LuNotebookPen className="text-success me-3" />
+                          </div>
+                        }
                         <div className="wd-assignment-description">
                           <p>
                             <span className="wd-text-bold">{assignment.title}</span>
@@ -47,7 +52,7 @@ export default function Assignments() {
                             <br></br>
                             <b>Due</b> {assignment.due_date} | {assignment.points} points </p>
                         </div>
-                        <LessonControlButtons />
+                        {isFaculty && <LessonControlButtons />}
                       </div>
                     </Link>
                   </ListGroup.Item>

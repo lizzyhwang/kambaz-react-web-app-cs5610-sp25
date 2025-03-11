@@ -1,17 +1,26 @@
 import { FaPlus } from "react-icons/fa6";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
 export default function AssignmentControls() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const isFaculty = currentUser.role == "FACULTY";
+
   return (
     <div id="wd-assignment-controls" className="text-nowrap">
-      <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn">
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Assignment
-      </Button>
-      <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-view-progress">
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Group
-      </Button>
+      {isFaculty &&
+        <div>
+          <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn">
+            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+            Assignment
+          </Button>
+          <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-view-progress">
+            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+            Group
+          </Button>
+        </div>
+      }
       <Form>
         <Form.Group as={Row} className="mb-3">
           <Col sm={10}>
