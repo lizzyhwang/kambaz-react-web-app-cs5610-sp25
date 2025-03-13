@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCourse, deleteCourse, updateCourse } from "./courses/reducer";
 import * as db from "./database";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Dashboard() {
   const { courses } = useSelector((state: any) => state.coursesReducer);
@@ -23,6 +23,7 @@ export function Dashboard() {
 
   const [showEnrolled, setShowEnrolled] = useState<boolean>(false);
   const [coursesToShow, setCoursesToShow] = useState<any>(enrolled_courses);
+  const [value, setValue] = useState(0);
 
   return (
     <div id="wd-dashboard">
@@ -41,7 +42,7 @@ export function Dashboard() {
                 name_input.value = "";
                 const desc_input = document.getElementById("enter-course-desc") as HTMLInputElement;
                 desc_input.value = "";
-                setCourseData({ id: "", name: "", decription: "" })
+                setCourseData({ id: "", name: "", decription: "" });
               }} >
               Update
             </button>
@@ -70,7 +71,7 @@ export function Dashboard() {
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {coursesToShow
+          {enrolled_courses
             .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>
