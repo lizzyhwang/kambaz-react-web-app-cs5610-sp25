@@ -47,16 +47,26 @@ export default function Assignments() {
                         </div>
                       }
                       <div className="wd-assignment-description">
-                        <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
-                          className="text-decoration-none text-dark">
-                          <p>
+                        {isFaculty &&
+                          <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                            className="text-decoration-none text-dark">
+                            <p>
+                              <span className="wd-text-bold">{assignment.title}</span>
+                              <br></br>
+                              <span className="text-danger">Multiple Modules</span>  |  <b>Not Available</b> until May 6 at 12:00 am
+                              <br></br>
+                              <b>Due</b> {assignment.due_date} | {assignment.points} points </p>
+                          </Link>
+                        }
+                        {!isFaculty &&
+                          <p onClick={() => alert("Can't edit this assignment! You are not a faculty member.")}>
                             <span className="wd-text-bold">{assignment.title}</span>
                             <br></br>
                             <span className="text-danger">Multiple Modules</span>  |  <b>Not Available</b> until May 6 at 12:00 am
                             <br></br>
-                            <b>Due</b> {assignment.due_date} | {assignment.points} points </p>
-                        </Link>
-
+                            <b>Due</b> {assignment.due_date} | {assignment.points} points
+                          </p>
+                        }
                       </div>
                       {isFaculty && <AssignmentStatusButtons
                         aid={assignment._id} />}

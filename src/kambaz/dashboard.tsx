@@ -21,6 +21,8 @@ export function Dashboard() {
   const [courseData, setCourseData] = useState<any>({});
   const dispatch = useDispatch();
 
+  const [showEnrolled, setShowEnrolled] = useState<boolean>(false);
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -50,7 +52,14 @@ export function Dashboard() {
         </div>
       )}
 
-      <h2 id="wd-dashboard-published">Published Courses ({enrolled_courses.length})</h2> <hr />
+      <div className="d-flex justify-content-between">
+        <h2 id="wd-dashboard-published">Published Courses ({enrolled_courses.length})</h2>
+        <button className="btn btn-primary"
+        >
+          Enrollments
+        </button>
+      </div>
+      <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
           {enrolled_courses
