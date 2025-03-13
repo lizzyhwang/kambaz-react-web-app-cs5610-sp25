@@ -37,30 +37,31 @@ export default function Assignments() {
                 .map((assignment: any) => (
                   <ListGroup.Item action
                     className="wd-assignment-list-item p-3 ps-1 flex align-items-center justify-content-between">
-                    <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
-                      className="text-decoration-none text-dark">
-                      <div className="d-flex align-items-center">
-                        {isFaculty &&
-                          <div>
-                            <BsGripVertical className="me-2 fs-3" />
-                            <LuNotebookPen className="text-success me-3" />
-                          </div>
-                        }
-                        <div className="wd-assignment-description">
+                    {/* <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                      className="text-decoration-none text-dark"> */}
+                    <div className="d-flex align-items-center">
+                      {isFaculty &&
+                        <div>
+                          <BsGripVertical className="me-2 fs-3" />
+                          <LuNotebookPen className="text-success me-3" />
+                        </div>
+                      }
+                      <div className="wd-assignment-description">
+                        <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                          className="text-decoration-none text-dark">
                           <p>
                             <span className="wd-text-bold">{assignment.title}</span>
                             <br></br>
                             <span className="text-danger">Multiple Modules</span>  |  <b>Not Available</b> until May 6 at 12:00 am
                             <br></br>
                             <b>Due</b> {assignment.due_date} | {assignment.points} points </p>
-                        </div>
-                        {isFaculty && <AssignmentStatusButtons
-                          aid={assignment._id}
-                          deleteAssignment={(aid) => {
-                            dispatch(deleteAssignment(aid));
-                          }} />}
+                        </Link>
+
                       </div>
-                    </Link>
+                      {isFaculty && <AssignmentStatusButtons
+                        aid={assignment._id} />}
+                    </div>
+                    {/* </Link> */}
                   </ListGroup.Item>
                 ))}
             </ListGroup>

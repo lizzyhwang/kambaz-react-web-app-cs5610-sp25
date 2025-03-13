@@ -15,10 +15,8 @@ export default function AssignmentControls() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
-  console.log(assignments)
 
   const handleNew = () => {
-    console.log(assignments.length)
     const dummy = {
       _id: uuidv4(),
       title: "",

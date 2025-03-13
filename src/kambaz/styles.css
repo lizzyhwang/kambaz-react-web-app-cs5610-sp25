@@ -61,3 +61,8 @@ body * {
 .wd-padding-right-30px {
   padding-right: 30px;
 }
+
+.transparent-button {
+  background-color: transparent;
+  border: 0px;
+}

@@ -14,7 +14,6 @@ export function Dashboard(
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
-  console.log(currentUser);
   const isFaculty = currentUser.role == "FACULTY";
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

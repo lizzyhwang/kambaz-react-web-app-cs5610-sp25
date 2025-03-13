@@ -15,8 +15,6 @@ export default function EditorControls({ aid, deleteAssignment, updates, updateA
       <Link to={`/Kambaz/Courses/${cid}/Assignments`}>
         <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
           onClick={() => {
-            console.log(updates);
-            console.log(assignment);
             updateAssignment({
               ...assignment,
               title: updates.title,
