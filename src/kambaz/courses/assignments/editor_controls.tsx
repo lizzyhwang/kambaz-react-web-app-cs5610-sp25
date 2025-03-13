@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function EditorControls({ aid, deleteAssignment, updates, updateAssignment }:
@@ -6,15 +7,26 @@ export default function EditorControls({ aid, deleteAssignment, updates, updateA
   const { cid } = useParams();
   const { pathname } = useLocation();
   const newAssignment = pathname.includes("new")
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const assignment = assignments.filter((a: any) => a._id === aid)[0]
 
   return (
     <div id="wd-assignment-editor-controls" className="text-nowrap">
       <Link to={`/Kambaz/Courses/${cid}/Assignments`}>
         <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
-        // onClick={() => {
-        //   console.log(updates);
-        //   updateAssignment(updates);
-        // }}
+          onClick={() => {
+            console.log(updates);
+            console.log(assignment);
+            updateAssignment({
+              ...assignment,
+              title: updates.title,
+              group: updates.group,
+              description: updates.description,
+              points: updates.points,
+              due_date: updates.due_date,
+              available_date: updates.available_date
+            });
+          }}
         >
           Save
         </Button>

@@ -26,7 +26,7 @@ const assignmentsSlice = createSlice({
     },
     updateAssignment: (state, { payload: assignment }) => {
       state.assignments = state.assignments.map((a: any) =>
-        a._id === assignment._id ? assignment : a
+        a._id == assignment._id ? assignment : a
       ) as any;
     },
     editAssignment: (state, { payload: assignmentId }) => {

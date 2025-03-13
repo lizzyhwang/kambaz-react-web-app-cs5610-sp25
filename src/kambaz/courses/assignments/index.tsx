@@ -2,7 +2,7 @@ import { ListGroup } from "react-bootstrap";
 import AssignmentControls from "./assignment_controls";
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentControlButtons from "./assignment_controls_buttons";
-import LessonControlButtons from "../modules/lesson_control_buttons";
+import AssignmentStatusButtons from "./assignment_status_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +54,7 @@ export default function Assignments() {
                             <br></br>
                             <b>Due</b> {assignment.due_date} | {assignment.points} points </p>
                         </div>
-                        {isFaculty && <LessonControlButtons
+                        {isFaculty && <AssignmentStatusButtons
                           aid={assignment._id}
                           deleteAssignment={(aid) => {
                             dispatch(deleteAssignment(aid));

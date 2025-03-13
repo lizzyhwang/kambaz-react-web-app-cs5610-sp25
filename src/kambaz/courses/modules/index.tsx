@@ -66,11 +66,7 @@ export default function Modules() {
                     <ListGroup.Item className="wd-lesson p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" />
                       {lesson.name}
-                      <LessonControlButtons
-                        aid={lesson._id}
-                        deleteAssignment={(aid) => {
-                          dispatch(deleteAssignment(aid));
-                        }} />
+                      <LessonControlButtons />
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
