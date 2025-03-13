@@ -22,6 +22,7 @@ export function Dashboard() {
   const dispatch = useDispatch();
 
   const [showEnrolled, setShowEnrolled] = useState<boolean>(false);
+  const [coursesToShow, setCoursesToShow] = useState<any>({ enrolled_courses });
 
   return (
     <div id="wd-dashboard">
@@ -53,8 +54,15 @@ export function Dashboard() {
       )}
 
       <div className="d-flex justify-content-between">
-        <h2 id="wd-dashboard-published">Published Courses ({enrolled_courses.length})</h2>
+        <h2 id="wd-dashboard-published">Published Courses ({coursesToShow.length})</h2>
         <button className="btn btn-primary"
+          onClick={() => {
+            if (coursesToShow == courses) {
+              setCoursesToShow(enrolled_courses);
+            } else {
+              setCoursesToShow(courses);
+            }
+          }}
         >
           Enrollments
         </button>
@@ -62,7 +70,7 @@ export function Dashboard() {
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {enrolled_courses
+          {coursesToShow
             .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>
