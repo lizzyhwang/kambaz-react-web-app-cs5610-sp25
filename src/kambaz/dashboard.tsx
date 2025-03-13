@@ -22,7 +22,7 @@ export function Dashboard() {
   const dispatch = useDispatch();
 
   const [showEnrolled, setShowEnrolled] = useState<boolean>(false);
-  const [coursesToShow, setCoursesToShow] = useState<any>({ enrolled_courses });
+  const [coursesToShow, setCoursesToShow] = useState<any>(enrolled_courses);
 
   return (
     <div id="wd-dashboard">
