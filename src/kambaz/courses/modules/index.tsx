@@ -1,16 +1,13 @@
 import { useParams } from "react-router";
-import * as db from "../../database";
 import { FormControl, ListGroup } from "react-bootstrap";
 import ModulesControls from "./modules_controls";
 import ModuleControlButtons from "./module_control_buttons";
 import LessonControlButtons from "./lesson_control_buttons";
 import { BsGripVertical } from "react-icons/bs";
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 import { addModule, editModule, updateModule, deleteModule }
   from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "../assignments/reducer";
 
 export default function Modules() {
   const { cid } = useParams();

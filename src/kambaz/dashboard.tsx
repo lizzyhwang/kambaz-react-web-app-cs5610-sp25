@@ -1,41 +1,25 @@
-import React, { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourse, deleteCourse, updateCourse } from "./courses/reducer";
 import * as db from "./database";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
-export function Dashboard(
-  { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse }: {
-      courses: any[]; course: any; setCourse: (course: any) => void;
-      addNewCourse: () => void; deleteCourse: (course: any) => void;
-      updateCourse: () => void;
-    }) {
-
+export function Dashboard() {
+  const { courses } = useSelector((state: any) => state.coursesReducer);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = db;
   const isFaculty = currentUser.role == "FACULTY";
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCourse((prevState: any) => ({
-      ...prevState,
-      name: event.target.value,
-    }));
-  };
-  const handleDescChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCourse((prevState: any) => ({
-      ...prevState,
-      description: event.target.value,
-    }));
-  };
-
-  const enrolled_courses = courses.filter((course) =>
+  const { enrollments } = db;
+  const enrolled_courses = courses.filter((course: any) =>
     enrollments.some(
       (enrollment) =>
         enrollment.user === currentUser._id &&
         enrollment.course === course._id
     ))
 
+  const [courseData, setCourseData] = useState<any>({});
+  const dispatch = useDispatch();
 
   return (
     <div id="wd-dashboard">
@@ -45,15 +29,23 @@ export function Dashboard(
           <h5>New Course
             <button className="btn btn-primary float-end"
               id="wd-add-new-course-click"
-              onClick={addNewCourse} > Add </button>
-            <button className="btn btn-warning float-end me-2"
-              onClick={updateCourse} id="wd-update-course-click">
+              onClick={() => dispatch(addCourse(courseData))} > Add </button>
+            <button className="btn btn-warning float-end me-2" id="wd-update-course-click"
+              onClick={() => {
+                let course = courses.find((c: any) => c._id === courseData.id)
+                dispatch(updateCourse({ ...course, name: courseData.name, description: courseData.description }))
+                const name_input = document.getElementById("enter-course-name") as HTMLInputElement;
+                name_input.value = "";
+                const desc_input = document.getElementById("enter-course-desc") as HTMLInputElement;
+                desc_input.value = "";
+                setCourseData({ id: "", name: "", decription: "" })
+              }} >
               Update
             </button>
           </h5>
           <br />
-          <input placeholder="Course Name" className="form-control mb-2" onChange={handleNameChange} />
-          <input placeholder="Course Description" className="form-control" onChange={handleDescChange} />
+          <input id="enter-course-name" placeholder="Course Name" className="form-control mb-2" onChange={(e) => { courseData["name"] = e.target.value; }} />
+          <input id="enter-course-desc" placeholder="Course Description" className="form-control" onChange={(e) => { courseData["description"] = e.target.value; }} />
           <hr />
         </div>
       )}
@@ -62,8 +54,7 @@ export function Dashboard(
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
           {enrolled_courses
-            .map((course) => (
-
+            .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>
                   <Link to={`/Kambaz/Courses/${course._id}/Home`}
@@ -79,7 +70,7 @@ export function Dashboard(
                           <div>
                             <button onClick={(event) => {
                               event.preventDefault();
-                              deleteCourse(course._id);
+                              dispatch(deleteCourse(course._id));
                             }} className="btn btn-danger float-end"
                               id="wd-delete-course-click">
                               Delete
@@ -87,7 +78,11 @@ export function Dashboard(
                             <button id="wd-edit-course-click"
                               onClick={(event) => {
                                 event.preventDefault();
-                                setCourse(course);
+                                const name_input = document.getElementById("enter-course-name") as HTMLInputElement;
+                                name_input.value = course.name;
+                                const desc_input = document.getElementById("enter-course-desc") as HTMLInputElement;
+                                desc_input.value = course.description;
+                                setCourseData({ id: course._id, name: course.name, description: course.description });
                               }}
                               className="btn btn-warning me-2 float-end" >
                               Edit
@@ -99,7 +94,6 @@ export function Dashboard(
                   </Link>
                 </Card>
               </Col>
-
             ))}
         </Row >
       </div >
