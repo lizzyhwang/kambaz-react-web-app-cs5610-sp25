@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addModule, editModule, updateModule, deleteModule }
   from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "../assignments/reducer";
 
 export default function Modules() {
   const { cid } = useParams();
@@ -65,7 +66,11 @@ export default function Modules() {
                     <ListGroup.Item className="wd-lesson p-3 ps-1">
                       <BsGripVertical className="me-2 fs-3" />
                       {lesson.name}
-                      <LessonControlButtons />
+                      <LessonControlButtons
+                        aid={lesson._id}
+                        deleteAssignment={(aid) => {
+                          dispatch(deleteAssignment(aid));
+                        }} />
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

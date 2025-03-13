@@ -11,12 +11,11 @@ export default function EditorControls({ aid, deleteAssignment, updates, updateA
     <div id="wd-assignment-editor-controls" className="text-nowrap">
       <Link to={`/Kambaz/Courses/${cid}/Assignments`}>
         <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
-          onClick={() => {
-            console.log(updates)
-            if (newAssignment) {
-              updateAssignment({ ...updates })
-            }
-          }}>
+        // onClick={() => {
+        //   console.log(updates);
+        //   updateAssignment(updates);
+        // }}
+        >
           Save
         </Button>
       </Link>
@@ -24,7 +23,7 @@ export default function EditorControls({ aid, deleteAssignment, updates, updateA
         <Button variant="secondary" size="sm" className="me-1 float-end" id="wd-view-progress"
           onClick={() => {
             if (newAssignment) {
-              deleteAssignment(aid)
+              deleteAssignment(aid);
             }
           }}>
           Cancel
