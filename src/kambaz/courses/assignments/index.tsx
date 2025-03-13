@@ -5,19 +5,19 @@ import AssignmentControlButtons from "./assignment_controls_buttons";
 import LessonControlButtons from "../modules/lesson_control_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
-import * as db from "../../database";
 import { useSelector } from "react-redux";
-
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
 
   return (
     <div id="wd-assignments">
-      <AssignmentControls />
+      {isFaculty &&
+        <AssignmentControls />
+      }
       <br></br>
       <ListGroup className="rounded-0" id="wd-assignments">
 
