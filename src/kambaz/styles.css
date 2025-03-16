@@ -47,6 +47,7 @@ body * {
 .wd-assignment-description {
   font-size: 1rem;
   flex-grow: 1;
+  margin-left: 10px;
 }
 
 .wd-fg-red {
@@ -59,4 +60,9 @@ body * {
 
 .wd-padding-right-30px {
   padding-right: 30px;
+}
+
+.transparent-button {
+  background-color: transparent;
+  border: 0px;
 }

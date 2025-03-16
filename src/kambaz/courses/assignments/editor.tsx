@@ -2,13 +2,24 @@ import { Col, Form, FormControl, FormSelect, InputGroup, Row } from "react-boots
 import { IoCalendarOutline } from "react-icons/io5";
 import EditorControls from "./editor_controls";
 import { useParams } from "react-router-dom";
-import * as db from "../../database";
-
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment, updateAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
   const { aid } = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const assignment = assignments.filter((assignment: any) => assignment._id === aid)[0];
+  const dispatch = useDispatch();
+  let progress = {
+    _id: assignment._id,
+    title: assignment.title,
+    description: assignment.description,
+    points: assignment.points,
+    group: assignment.group,
+    due_date: assignment.due_date,
+    available_date: assignment.available_date,
+    until_date: assignment.until_date,
+  };
 
   return (
     <div id="wd-assignments-editor">
@@ -17,13 +28,15 @@ export default function AssignmentEditor() {
       </Form.Label>
       <Form.Group as={Row} className="mb-3" controlId="assignmentName">
         <Col sm={10}>
-          <Form.Control type="text" value={assignment.title} />
+          <Form.Control type="text" defaultValue={assignment.title}
+            onChange={(e) => { progress["title"] = e.target.value; }} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3">
         <Col sm={10}>
           <Form.Control as="textarea" style={{ height: "400px" }}
-            value={assignment.description} />
+            defaultValue={assignment.description}
+            onChange={(e) => { progress["description"] = e.target.value; }} />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" controlId="points">
@@ -31,7 +44,8 @@ export default function AssignmentEditor() {
           Points
         </Form.Label>
         <Col sm={6}>
-          <Form.Control type="email" value={assignment.points} />
+          <Form.Control type="email" defaultValue={assignment.points}
+            onChange={(e) => { progress["points"] = e.target.value; }} />
         </Col>
       </Form.Group>
 
@@ -40,7 +54,7 @@ export default function AssignmentEditor() {
           Assignment Group
         </Form.Label>
         <Col sm={6}>
-          <FormSelect>
+          <FormSelect defaultValue={assignment.group} onChange={(e) => { progress["group"] = e.target.value; }}>
             <option value="1">Assignments</option>
             <option value="2">Quizzes</option>
             <option value="3">Exams</option>
@@ -105,14 +119,15 @@ export default function AssignmentEditor() {
             <Form.Label className="wd-text-bold">
               Assign To
             </Form.Label>
-            <Form.Control className="mb-3" type="email" value="100" />
+            <Form.Control className="mb-3" type="email" defaultValue="100" />
 
             <div className="mb-3">
               <Form.Label className="wd-text-bold">
                 Due
               </Form.Label>
               <InputGroup>
-                <FormControl value={assignment.due_date} />
+                <FormControl defaultValue={assignment.due_date}
+                  onChange={(e) => { progress["due_date"] = e.target.value; }} />
                 <InputGroup.Text>
                   <IoCalendarOutline />
                 </InputGroup.Text>
@@ -125,7 +140,8 @@ export default function AssignmentEditor() {
                   Available From
                 </Form.Label>
                 <InputGroup>
-                  <FormControl value={assignment.available_date} />
+                  <FormControl defaultValue={assignment.available_date}
+                    onChange={(e) => { progress["available_date"] = e.target.value; }} />
                   <InputGroup.Text>
                     <IoCalendarOutline />
                   </InputGroup.Text>
@@ -136,7 +152,8 @@ export default function AssignmentEditor() {
                   Until
                 </Form.Label>
                 <InputGroup>
-                  <FormControl />
+                  <FormControl defaultValue={assignment.due_date}
+                    onChange={(e) => { progress["until_date"] = e.target.value; }} />
                   <InputGroup.Text>
                     <IoCalendarOutline />
                   </InputGroup.Text>
@@ -149,7 +166,15 @@ export default function AssignmentEditor() {
 
       <hr />
 
-      <EditorControls />
+      <EditorControls
+        aid={aid}
+        deleteAssignment={(aid) => {
+          dispatch(deleteAssignment(aid));
+        }}
+        updates={progress}
+        updateAssignment={(progress) => {
+          dispatch(updateAssignment(progress))
+        }} />
 
     </div >
   );
