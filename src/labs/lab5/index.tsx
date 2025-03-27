@@ -3,6 +3,7 @@ import PathParameters from "./path_parameters";
 import QueryParameters from "./query_parameters";
 import WorkingWithObjects from "./working_with_objects";
 import WorkingWithArrays from "./working_with_arrays";
+import HttpClient from "./http_client";
 import "./styles.css";
 
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
@@ -21,6 +22,7 @@ export default function Lab5() {
       <QueryParameters />
       <WorkingWithObjects />
       <WorkingWithArrays />
+      <HttpClient />
     </div>
   );
 }
