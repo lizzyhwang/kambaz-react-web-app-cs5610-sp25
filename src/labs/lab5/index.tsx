@@ -5,6 +5,8 @@ import WorkingWithObjects from "./working_with_objects";
 import WorkingWithArrays from "./working_with_arrays";
 import HttpClient from "./http_client";
 import "./styles.css";
+import WorkingWithObjectsAsynchronously from "./working_with_objects_asynchronously";
+import WorkingWithArraysAsynchronously from "./working_with_arrays_asynchronously";
 
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 export default function Lab5() {
@@ -23,6 +25,8 @@ export default function Lab5() {
       <WorkingWithObjects />
       <WorkingWithArrays />
       <HttpClient />
+      <WorkingWithObjectsAsynchronously />
+      <WorkingWithArraysAsynchronously />
     </div>
   );
 }
