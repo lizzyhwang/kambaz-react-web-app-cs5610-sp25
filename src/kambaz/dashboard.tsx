@@ -2,28 +2,16 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCourse, deleteCourse, updateCourse } from "./courses/reducer";
-import * as db from "./database";
+import * as userClient from "./account/client";
 import { useEffect, useState } from "react";
 
-export function Dashboard() {
-  const { courses } = useSelector((state: any) => state.coursesReducer);
+export function Dashboard({ courses }: { courses: any[]; }) {
+  // const [courses, setCourses] = useState<any[]>([]);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
 
-  const { enrollments } = db;
-  const enrolled_courses = courses.filter((course: any) =>
-    enrollments.some(
-      (enrollment) =>
-        enrollment.user === currentUser._id &&
-        enrollment.course === course._id
-    ))
-
   const [courseData, setCourseData] = useState<any>({});
   const dispatch = useDispatch();
-
-  const [showEnrolled, setShowEnrolled] = useState<boolean>(false);
-  const [coursesToShow, setCoursesToShow] = useState<any>(enrolled_courses);
-  const [value, setValue] = useState(0);
 
   return (
     <div id="wd-dashboard">
@@ -55,15 +43,9 @@ export function Dashboard() {
       )}
 
       <div className="d-flex justify-content-between">
-        <h2 id="wd-dashboard-published">Published Courses ({coursesToShow.length})</h2>
+        <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
         <button className="btn btn-primary"
-          onClick={() => {
-            if (coursesToShow == courses) {
-              setCoursesToShow(enrolled_courses);
-            } else {
-              setCoursesToShow(courses);
-            }
-          }}
+          onClick={() => { }}
         >
           Enrollments
         </button>
@@ -71,7 +53,7 @@ export function Dashboard() {
       <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {enrolled_courses
+          {courses
             .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>

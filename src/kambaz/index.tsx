@@ -7,9 +7,26 @@ import "./styles.css";
 import ProtectedRoute from "./account/protected_route";
 import { useSelector } from "react-redux";
 import Session from "./account/session";
+import * as userClient from "./account/client"
+import { useEffect, useState } from "react";
 
 export default function Kambaz() {
-  const { courses } = useSelector((state: any) => state.coursesReducer);
+  const [courses, setCourses] = useState<any[]>([]);
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const fetchCourses = async () => {
+    try {
+      const courses = await userClient.findMyCourses(currentUser);
+      setCourses(courses);
+      console.log(courses);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+
 
   return (
     <Session>
@@ -21,7 +38,7 @@ export default function Kambaz() {
             <Route path="/Account/*" element={<Account />} />
             <Route path="/Dashboard/*" element={
               <ProtectedRoute>
-                <Dashboard />
+                <Dashboard courses={courses} />
               </ProtectedRoute>
             } />
             <Route path="/Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
