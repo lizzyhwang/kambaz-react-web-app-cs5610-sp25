@@ -9,6 +9,9 @@ export default function AccountNavigation() {
     [{ label: "Signin", path: `/Kambaz/Account/Signin` }, { label: "Signup", path: `/Kambaz/Account/Signup` }]
     :
     [{ label: "Profile", path: `/Kambaz/Account/Profile` }];
+  if (currentUser && currentUser.role == "ADMIN") {
+    links.push({ label: "Users", path: `/Kambaz/Account/Users` });
+  }
 
   return (
     <ListGroup id="wd-account-navigation" className="wd list-group fs-7 rounded-0">
