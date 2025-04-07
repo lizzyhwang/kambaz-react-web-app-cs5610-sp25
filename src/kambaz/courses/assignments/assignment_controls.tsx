@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { addAssignment } from "./reducer";
-
+import * as coursesClient from "../client";
 
 export default function AssignmentControls() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
@@ -16,7 +16,7 @@ export default function AssignmentControls() {
   const dispatch = useDispatch();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
 
-  const handleNew = () => {
+  const handleNew = async () => {
     const dummy = {
       _id: uuidv4(),
       title: "",
@@ -28,8 +28,13 @@ export default function AssignmentControls() {
       available_date: "",
       until_date: "",
     };
-    dispatch(addAssignment(dummy));
-    navigate(`/Kambaz/Courses/${cid}/Assignments/${dummy._id}/new`)
+    if (cid) {
+      const assignment = await coursesClient.createAssignmentForCourse(cid, dummy);
+      dispatch(addAssignment(assignment));
+      navigate(`/Kambaz/Courses/${cid}/Assignments/${assignment._id}/new`);
+    } else {
+      return;
+    }
   }
 
   return (

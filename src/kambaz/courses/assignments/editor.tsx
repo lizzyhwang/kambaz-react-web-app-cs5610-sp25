@@ -3,7 +3,8 @@ import { IoCalendarOutline } from "react-icons/io5";
 import EditorControls from "./editor_controls";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment, updateAssignment } from "./reducer";
+import { deleteAssignment, updateAssignment, addAssignment } from "./reducer";
+import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
   const { aid } = useParams();
@@ -20,6 +21,17 @@ export default function AssignmentEditor() {
     available_date: assignment.available_date,
     until_date: assignment.until_date,
   };
+
+  const saveAssignment = async (assignment: any) => {
+    await assignmentsClient.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
 
   return (
     <div id="wd-assignments-editor">
@@ -169,11 +181,11 @@ export default function AssignmentEditor() {
       <EditorControls
         aid={aid}
         deleteAssignment={(aid) => {
-          dispatch(deleteAssignment(aid));
+          removeAssignment(aid);
         }}
         updates={progress}
         updateAssignment={(progress) => {
-          dispatch(updateAssignment(progress))
+          saveAssignment({ ...progress, editing: false });
         }} />
 
     </div >
