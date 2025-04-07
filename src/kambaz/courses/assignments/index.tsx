@@ -6,7 +6,10 @@ import AssignmentStatusButtons from "./assignment_status_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -14,6 +17,14 @@ export default function Assignments() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
   const dispatch = useDispatch();
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
   return (
     <div id="wd-assignments">
@@ -33,7 +44,6 @@ export default function Assignments() {
           <div>
             <ListGroup id="wd-assignment-list" className="rounded-0">
               {assignments
-                .filter((assignment: any) => assignment.course === cid)
                 .map((assignment: any) => (
                   <ListGroup.Item action
                     className="wd-assignment-list-item p-3 ps-1 flex align-items-center justify-content-between">

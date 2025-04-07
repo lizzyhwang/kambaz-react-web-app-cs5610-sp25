@@ -11,8 +11,13 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.0",
+    "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
+<<<<<<< HEAD
     "mongoose": "^8.13.1",
+=======
+    "cors": "^2.8.5",
+>>>>>>> 03e5da94f24ea95861019e415b8db1aad6a4d2c3
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.8",
     "react-dom": "^18.3.1",
