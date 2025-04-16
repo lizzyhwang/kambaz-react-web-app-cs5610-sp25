@@ -6,9 +6,8 @@ import AssignmentStatusButtons from "./assignment_status_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment, setAssignments } from "./reducer";
+import { setAssignments } from "./reducer";
 import * as coursesClient from "../client";
-import * as assignmentsClient from "./client";
 import { useEffect } from "react";
 
 export default function Assignments() {
@@ -24,7 +23,7 @@ export default function Assignments() {
   };
   useEffect(() => {
     fetchAssignments();
-  }, []);
+  }, [cid]);
 
   return (
     <div id="wd-assignments">
