@@ -10,6 +10,7 @@ export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const signup = async () => {
+    console.log(user);
     const currentUser = await client.signup(user);
     dispatch(setCurrentUser(currentUser));
     navigate("/kambaz/account/profile");
@@ -20,10 +21,12 @@ export default function Signup() {
       <h1>Sign Up</h1>
       <FormControl id="wd-username"
         placeholder="username"
-        className="mb-2" />
+        className="mb-2"
+        onChange={(e) => setUser({ ...user, username: e.target.value })} />
       <FormControl id="wd-password"
         placeholder="password" type="password"
-        className="mb-2" />
+        className="mb-2"
+        onChange={(e) => setUser({ ...user, password: e.target.value })} />
       <FormControl id="wd-password"
         placeholder="verify password" type="password"
         className="mb-2" />

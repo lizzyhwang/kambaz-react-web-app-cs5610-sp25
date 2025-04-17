@@ -1,0 +1,33 @@
+This command will help you:
+1. Create and verify your MongoDB Atlas account in your browser.
+2. Return to the terminal to create your first free MongoDB database in Atlas.
+
+To verify your account, copy your one-time verification code:
+HRHB-4YHJ
+
+Paste the code in the browser when prompted to activate your Atlas CLI. Your code will expire after 10 minutes.
+
+To continue, go to https://account.mongodb.com/account/register/cli
+Successfully logged in as hwang.eli@northeastern.edu.
+
+[Default Settings]
+Cluster Name:                           Cluster75366
+Cloud Provider and Region:              AWS - US_EAST_1
+Database User Username:                 Cluster75366
+Load sample data:                       Yes
+Allow connections from (IP Address):    173.76.27.61
+
+? How do you want to set up your Atlas cluster? default
+We are deploying Cluster75366...
+
+Store your database authentication access details in a secure location:
+Database User Username: Cluster75366
+Database User Password: RXxMWXdHTW9R
+
+Creating your cluster... [It's safe to 'Ctrl + C']
+Cluster created.
+Your connection string: mongodb+srv://cluster75366.g0htbcs.mongodb.net
+
+Loading sample data into your cluster... [It's safe to 'Ctrl + C']
+|^C
+Enter 'atlas cluster watch Cluster75366' to learn when your cluster is available.

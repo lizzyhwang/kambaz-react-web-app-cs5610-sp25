@@ -1,20 +1,24 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse, deleteCourse, updateCourse } from "./courses/reducer";
-import * as userClient from "./account/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function Dashboard({
   courses,
   addCourse,
   deleteCourse,
   updateCourse,
+  enrolling,
+  setEnrolling,
+  updateEnrollment,
 }: {
   courses: any[];
   addCourse: (course: any) => void;
   deleteCourse: (courseId: string) => void;
   updateCourse: (course: any) => void;
+  enrolling: boolean;
+  setEnrolling: (enrolling: boolean) => void;
+  updateEnrollment: (courseId: string, enrolled: boolean) => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
@@ -53,7 +57,12 @@ export function Dashboard({
 
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <h1 id="wd-dashboard-title">
+        Dashboard
+        <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
+          {enrolling ? "My Courses" : "All Courses"}
+        </button>
+      </h1> <hr />
       {isFaculty && (
         <div>
           <h5>New Course
@@ -79,12 +88,7 @@ export function Dashboard({
       )}
 
       <div className="d-flex justify-content-between">
-        <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
-        <button className="btn btn-primary"
-          onClick={() => { }}
-        >
-          Enrollments
-        </button>
+        <h2 id="wd-dashboard-published">{enrolling ? "Published Courses" : "My Courses"} ({courses.length})</h2>
       </div>
       <hr />
       <div id="wd-dashboard-courses">
@@ -97,7 +101,19 @@ export function Dashboard({
                     className="wd-dashboard-course-link text-decoration-none text-dark" >
                     <Card.Img variant="top" src="/images/reactjs.jpg" width={200} />
                     <Card.Body>
-                      <Card.Title className="wd-dashboard-course-title">{course.name}</Card.Title>
+                      <Card.Title className="wd-dashboard-course-title">
+                        {enrolling && (
+                          <button
+                            onClick={(event) => {
+                              event.preventDefault();
+                              updateEnrollment(course._id, !course.enrolled);
+                            }}
+                            className={`btn ${course.enrolled ? "btn-danger" : "btn-success"} float-end`} >
+                            {course.enrolled ? "Unenroll" : "Enroll"}
+                          </button>
+                        )}
+                        {course.name}
+                      </Card.Title>
                       <Card.Text className="wd-dashboard-course-description overflow-hidden" style={{ height: "100px" }}>
                         {course.description}</Card.Text>
                       <div className="d-flex justify-content-between">
