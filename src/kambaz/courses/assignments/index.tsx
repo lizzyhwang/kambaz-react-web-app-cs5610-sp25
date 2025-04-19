@@ -6,7 +6,7 @@ import AssignmentStatusButtons from "./assignment_status_buttons";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setAssignments } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
 import * as coursesClient from "../client";
 import { useEffect } from "react";
 
@@ -25,6 +25,8 @@ export default function Assignments() {
     fetchAssignments();
   }, [cid]);
 
+  // console.log(assignments);
+
   return (
     <div id="wd-assignments">
       {isFaculty &&
@@ -32,7 +34,6 @@ export default function Assignments() {
       }
       <br></br>
       <ListGroup className="rounded-0" id="wd-assignments">
-
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
           <div id="wd-assignments-title"
             className="p-3 ps-2 bg-secondary">
@@ -46,8 +47,6 @@ export default function Assignments() {
                 .map((assignment: any) => (
                   <ListGroup.Item action
                     className="wd-assignment-list-item p-3 ps-1 flex align-items-center justify-content-between">
-                    {/* <Link to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
-                      className="text-decoration-none text-dark"> */}
                     <div className="d-flex align-items-center">
                       {isFaculty &&
                         <div>
@@ -80,7 +79,6 @@ export default function Assignments() {
                       {isFaculty && <AssignmentStatusButtons
                         aid={assignment._id} />}
                     </div>
-                    {/* </Link> */}
                   </ListGroup.Item>
                 ))}
             </ListGroup>

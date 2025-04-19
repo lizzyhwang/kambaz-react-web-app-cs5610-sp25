@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Combustion Quiz",
+    "description": "Take after completing the Fuel and Combustion module.",
+    "course": "RS101",
+    "type": 0,
+    "points": 10,
+    "assignment_group": 1,
+    "shuffle_answers": true,
+    "time_limit": 20,
+    "multiple_attempts": false,
+    "how_many_attempts": 1,
+    "show_correct_answers": {
+      "enabled": true,
+      "when_to_show": "May 14, 2024, 12:00 am"
+    },
+    "access_code": "",
+    "one_question_at_a_time": true,
+    "webcam_required": false,
+    "lock_after_answering": false,
+    "due_date": "May 14, 2024, 12:00 am",
+    "available_date": "May 6, 2024, 12:00 am",
+    "until_date": ""
+  }
+]

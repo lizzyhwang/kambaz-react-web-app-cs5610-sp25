@@ -4,6 +4,7 @@ import Modules from "./modules";
 import Home from "./home";
 import Assignments from "./assignments"
 import AssignmentEditor from "./assignments/editor";
+import Quizzes from "./quizzes";
 import { FaAlignJustify } from "react-icons/fa6";
 import PeopleTable from "./people/table";
 import { useEffect, useState } from "react";
@@ -46,6 +47,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
             <Route path="Assignments/:aid/new" element={<AssignmentEditor />} />
+            <Route path="Quizzes" element={<Quizzes />} />
             <Route path="People" element={<PeopleTable users={users} />} />
           </Routes>
         </div></div>
