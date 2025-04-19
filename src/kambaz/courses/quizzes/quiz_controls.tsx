@@ -4,41 +4,52 @@ import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { addAssignment } from "./reducer";
 import * as coursesClient from "../client";
 
-export default function AssignmentControls() {
+export default function QuizControls() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
   const { cid } = useParams();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  // const dispatch = useDispatch();
+  // const { quizzes } = useSelector((state: any) => state.quizzesReducer);
 
   const handleNew = async () => {
     const dummy = {
       _id: uuidv4(),
-      title: "",
-      course: cid,
+      title: "New Quiz",
       description: "",
-      points: "0",
-      group: "1",
-      due_date: "",
-      available_date: "",
-      until_date: "",
+      course: cid,
+      type: "GRADED_QUIZ",
+      points: 10,
+      assignment_group: "QUIZ",
+      shuffle_answers: true,
+      time_limit: 20,
+      multiple_attempts: false,
+      how_many_attempts: 1,
+      show_correct_answers: {
+        enabled: true,
+        when_to_show: null,
+      },
+      access_code: "",
+      one_question_at_a_time: true,
+      webcam_required: false,
+      lock_after_answering: false,
+      due_date: null,
+      available_date: null,
+      until_date: null,
     };
     if (cid) {
-      const assignment = await coursesClient.createAssignmentForCourse(cid, dummy);
-      dispatch(addAssignment(assignment));
-      navigate(`/Kambaz/Courses/${cid}/Assignments/${assignment._id}/new`);
+      const quiz = await coursesClient.createQuizForCourse(cid, dummy);
+      navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/new`);
     } else {
       return;
     }
   }
 
   return (
-    <div id="wd-assignment-controls" className="text-nowrap">
+    <div id="wd-quiz-controls" className="text-nowrap">
       {isFaculty &&
         <div>
           <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn"
@@ -46,11 +57,7 @@ export default function AssignmentControls() {
               handleNew();
             }}>
             <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-            Assignment
-          </Button>
-          <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-view-progress">
-            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-            Group
+            Quiz
           </Button>
         </div>
       }
@@ -61,7 +68,7 @@ export default function AssignmentControls() {
               <InputGroup.Text>
                 <FaSearch style={{ bottom: "1px" }} />
               </InputGroup.Text>
-              <Form.Control type="text" placeholder="Search..." />
+              <Form.Control type="email" placeholder="Search..." />
             </InputGroup>
           </Col>
         </Form.Group>

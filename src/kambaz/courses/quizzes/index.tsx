@@ -6,6 +6,7 @@ import { ListGroup } from "react-bootstrap";
 import { setQuizzes } from "./reducer";
 import { IoRocketOutline } from "react-icons/io5";
 import QuizStatusButtons from "./quiz_status_buttons";
+import QuizControls from "./quiz_controls";
 
 export default function Quizzes() {
   const { cid } = useParams();
@@ -13,13 +14,12 @@ export default function Quizzes() {
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const isFaculty = currentUser.role == "FACULTY";
   const dispatch = useDispatch();
+  const today = new Date();
 
   const fetchQuizzes = async () => {
     const quizzes = await coursesClient.findQuizzesForCourse(cid as string);
     dispatch(setQuizzes(quizzes));
   }
-
-  // console.log(quizzes);
 
   useEffect(() => {
     fetchQuizzes();
@@ -27,7 +27,7 @@ export default function Quizzes() {
 
   return (
     <div id="wd-quizzes">
-      {/* {isFaculty && <QuizControls />} */}
+      {isFaculty && <QuizControls />}
       <br></br>
       <ListGroup className="rounded-0" id="wd-quizzes">
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
@@ -48,7 +48,24 @@ export default function Quizzes() {
                         <p>
                           <span className="wd-text-bold">{quiz.title}</span>
                           <br></br>
-                          <b>Not Available</b> until {quiz.available_date} | <b>Due</b> {quiz.due_date} | {quiz.points} points | 10 questions </p>
+                          {new Date(quiz.until_date) < today ? (
+                            <>
+                              <b>Closed</b> | <b>Due</b> {new Date(quiz.due_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | {quiz.points} points | 10 questions
+                            </>
+                          ) : (
+                            <>
+                              {new Date(quiz.available_date) < today ? (
+                                <>
+                                  <b>Available Now</b> | <b>Due</b> {new Date(quiz.due_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | {quiz.points} points | 10 questions
+                                </>
+                              ) : (
+                                <>
+                                  <b>Available</b> {new Date(quiz.available_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | <b>Due</b> {new Date(quiz.due_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} | {quiz.points} points | 10 questions
+                                </>
+                              )}
+                            </>
+                          )}
+                        </p>
                       </Link>
                     </div>
                     {isFaculty && <QuizStatusButtons
