@@ -23,7 +23,7 @@ export default function Quizzes() {
 
   useEffect(() => {
     fetchQuizzes();
-  }, [cid]);
+  }, [cid, quizzes]);
 
   return (
     <div id="wd-quizzes">

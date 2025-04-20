@@ -22,6 +22,6 @@ const quizzesSlice = createSlice({
     },
   }
 });
-export const { setQuizzes, removeQuiz } =
+export const { setQuizzes, removeQuiz, updateQuiz } =
   quizzesSlice.actions;
 export default quizzesSlice.reducer;

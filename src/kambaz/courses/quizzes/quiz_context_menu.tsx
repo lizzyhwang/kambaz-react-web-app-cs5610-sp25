@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import * as quizClient from "./client";
 import { useDispatch } from "react-redux";
-import { removeQuiz } from "./reducer";
+import { removeQuiz, updateQuiz } from "./reducer";
+import { useNavigate, useParams } from "react-router";
 
 interface DropdownItemProps {
   icon?: string
-  quizId: string
+  quiz: { _id: string, published: boolean }
 }
 
-export const QuizContextMenu: React.FC<DropdownItemProps> = ({ quizId }) => {
+export const QuizContextMenu: React.FC<DropdownItemProps> = ({ quiz }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { cid } = useParams();
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -18,22 +21,18 @@ export const QuizContextMenu: React.FC<DropdownItemProps> = ({ quizId }) => {
 
   const dispatch = useDispatch();
 
-  const deleteQuiz = async (quizId: string) => {
+  const deleteQuiz = async (quizId: any) => {
     await quizClient.deleteQuiz(quizId);
     dispatch(removeQuiz(quizId));
   };
 
-  const dropdownOptions: Array<any> = [
-    {
-      value: "Delete",
-      onClick: deleteQuiz,
-      color: "red",
-    },
-    {
-      value: "Edit",
-      // onClick: onEdit,
+  const togglePublished = async () => {
+    if (!quiz) {
+      return;
     }
-  ]
+    const newQuiz = await quizClient.updateQuiz({ ...quiz, published: !quiz.published })
+    dispatch(updateQuiz(newQuiz));
+  }
 
   return (
     <div className="dropdown">
@@ -41,10 +40,17 @@ export const QuizContextMenu: React.FC<DropdownItemProps> = ({ quizId }) => {
         <BsThreeDotsVertical />
       </div>
       {isOpen && <div className="dropdown-list-container">
-        <button className="dropdown-list-btn">
+        <button className="dropdown-list-btn"
+          onClick={() => {
+            togglePublished();
+            toggleDropdown();
+          }}>
+          {quiz.published ? "Unpublish" : "Publish"}
+        </button>
+        <button className="dropdown-list-btn" onClick={() => navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/edit`)}>
           Edit
         </button>
-        <button className="dropdown-list-btn red" onClick={() => deleteQuiz(quizId)}>
+        <button className="dropdown-list-btn red" onClick={() => deleteQuiz(quiz._id)}>
           Delete
         </button>
       </div>}

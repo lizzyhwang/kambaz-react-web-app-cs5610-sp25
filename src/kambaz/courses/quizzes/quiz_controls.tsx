@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import * as coursesClient from "../client";
@@ -12,8 +12,6 @@ export default function QuizControls() {
   const { cid } = useParams();
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const { quizzes } = useSelector((state: any) => state.quizzesReducer);
 
   const handleNew = async () => {
     const dummy = {
@@ -43,7 +41,7 @@ export default function QuizControls() {
     };
     if (cid) {
       const quiz = await coursesClient.createQuizForCourse(cid, dummy);
-      navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/new`);
+      navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/edit`);
     } else {
       return;
     }

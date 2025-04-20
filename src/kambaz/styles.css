@@ -102,3 +102,27 @@ body * {
 .red {
   color: red;
 }
+
+.green {
+  color: green;
+}
+
+.wd-table {
+  padding-right: 10px;
+}
+
+.wd-quiz-summary-table {
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  border-collapse: collapse;
+}
+
+.wd-quiz-summary-table-cell {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.border-1 {
+  border: 1px solid lightgray;
+  padding: 10px;
+}
