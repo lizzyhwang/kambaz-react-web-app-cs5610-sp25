@@ -9,7 +9,7 @@ export const deleteQuiz = async (quizId: string) => {
   return response.data;
 };
 
-export const updateAssignment = async (quiz: any) => {
+export const updateQuiz = async (quiz: any) => {
   const { data } = await axiosWithCredentials.put(`${QUIZZES_API}/${quiz._id}`, quiz);
   return data;
 };
