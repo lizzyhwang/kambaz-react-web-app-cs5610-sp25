@@ -39,6 +39,7 @@ export default function QuizControls() {
       due_date: null,
       available_date: null,
       until_date: null,
+      published: false,
     };
     if (cid) {
       const quiz = await coursesClient.createQuizForCourse(cid, dummy);
