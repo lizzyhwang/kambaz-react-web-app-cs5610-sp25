@@ -1,4 +1,3 @@
-import { Col, Form, FormControl, FormSelect, InputGroup, Row } from "react-bootstrap";
 import { useParams } from "react-router";
 import * as quizClient from "./client";
 import { useEffect, useState } from "react";
@@ -9,44 +8,23 @@ export default function QuizDetails() {
   const { qid } = useParams();
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const [quiz, setQuiz] = useState(quizzes.filter((q: any) => q._id === qid)[0]);
-  const fetchQuiz = async () => {
-    if (!qid) {
-      return;
-    }
-    const quiz = await quizClient.findQuizById(qid);
-    setQuiz(quiz);
-  }
+  // const [quiz, setQuiz] = useState<any>(null);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const isFaculty = currentUser.role == "FACULTY";
 
   useEffect(() => {
+    const fetchQuiz = async () => {
+      if (qid) {
+        const data = await quizClient.findQuizById(qid);
+        setQuiz(data);
+      }
+    };
     fetchQuiz();
   }, [qid]);
 
-  // let progress = {
-  //   _id: quiz._id,
-  //   title: quiz.title,
-  //   description: quiz.description,
-  //   course: quiz.course,
-  //   type: quiz.type,
-  //   points: quiz.points,
-  //   assignment_group: quiz.assignment_group,
-  //   shuffle_answers: quiz.shuffle_answers,
-  //   time_limit: quiz.time_limit,
-  //   multiple_attempts: quiz.multiple_attempts,
-  //   how_many_attempts: quiz.how_many_attempts,
-  //   show_correct_answers: quiz.show_correct_answers,
-  //   access_code: quiz.access_code,
-  //   one_question_at_a_time: quiz.one_question_at_a_time,
-  //   webcam_required: quiz.webcam_required,
-  //   lock_after_answering: quiz.lock_after_answering,
-  //   due_date: quiz.due_date,
-  //   available_date: quiz.available_date,
-  //   until_date: quiz.until_date,
-  //   published: quiz.published,
-  // }
-
   return (
     <div>
-      <QuizDetailsButtons />
+      {isFaculty && <QuizDetailsButtons />}
 
       <div id="wd-quiz-details" className="border-1">
         <h2>

@@ -126,3 +126,13 @@ body * {
   border: 1px solid lightgray;
   padding: 10px;
 }
+
+/* Target inactive tabs */
+.nav-tabs .nav-link:not(.active) {
+  color: #DC3546;
+}
+
+/* Optional: Change hover color as well */
+.nav-tabs .nav-link:not(.active):hover {
+  color: darkred;
+}
