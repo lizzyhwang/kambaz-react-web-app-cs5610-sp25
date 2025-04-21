@@ -51,7 +51,7 @@ export default function Users() {
 
   useEffect(() => {
     fetchUsers();
-  }, [uid, users]);
+  }, [uid]);
 
   return (
     <div>
