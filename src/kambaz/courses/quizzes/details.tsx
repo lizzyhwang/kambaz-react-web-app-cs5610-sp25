@@ -16,7 +16,6 @@ export default function QuizDetails() {
       if (qid) {
         const data = await quizClient.findQuizById(qid);
         setQuiz(data);
-        console.log(data);
       }
     };
     fetchQuiz();

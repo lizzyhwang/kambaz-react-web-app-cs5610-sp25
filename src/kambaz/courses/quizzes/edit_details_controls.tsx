@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
 export default function DetailsEditorControls({ updates, updateQuiz }:
-  { updates: any; updateQuiz: (newQuiz: any) => void; }) {
+  { updates: any; updateQuiz: () => void; }) {
   const { cid, qid } = useParams();
 
   return (
@@ -10,7 +10,8 @@ export default function DetailsEditorControls({ updates, updateQuiz }:
       <Link to={`/Kambaz/Courses/${cid}/Quizzes/${qid}`}>
         <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
           onClick={() => {
-            updateQuiz(updates);
+            updateQuiz();
+            console.log(updates);
           }}
         >
           Save

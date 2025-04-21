@@ -10,31 +10,6 @@ import { updateQuiz } from "./reducer";
 export default function QuizDetailsEditor() {
   const { qid } = useParams();
   const [quiz, setQuiz] = useState<any>(null);
-  const dispatch = useDispatch();
-
-  const [updates, setUpdates] = useState<any>({
-    _id: quiz?._id,
-    title: quiz?.title,
-    description: quiz?.description,
-    course: quiz?.course,
-    type: quiz?.type,
-    points: quiz?.points,
-    assignment_group: quiz?.assignment_group,
-    shuffle_answers: quiz?.shuffle_answers,
-    time_limit: quiz?.time_limit,
-    multiple_attempts: quiz?.multiple_attempts,
-    how_many_attempts: quiz?.how_many_attempts,
-    show_correct_answers: quiz?.show_correct_answers,
-    when_to_show: quiz?.when_to_show,
-    access_code: quiz?.access_code,
-    one_question_at_a_time: quiz?.one_question_at_a_time,
-    webcam_required: quiz?.webcam_required,
-    lock_after_answering: quiz?.lock_after_answering,
-    due_date: quiz?.due_date,
-    available_date: quiz?.available_date,
-    until_date: quiz?.until_date,
-    published: quiz?.published,
-  })
 
   const fetchQuiz = async () => {
     if (!qid) {
@@ -50,19 +25,17 @@ export default function QuizDetailsEditor() {
 
 
   const handleChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     const val = value === "true" ? true : (value === "false" ? false : value)
-    setUpdates({ ...quiz, [name]: val });
-    console.log(updates);
+    setQuiz({ ...quiz, [name]: val });
   };
 
   const setInstructions = (body: string) => {
-    setUpdates({ ...quiz, description: body });
+    setQuiz({ ...quiz, description: body });
   }
 
-  const handleUpdate = async (quiz: any) => {
+  const handleUpdate = async () => {
     await quizClient.updateQuiz(quiz);
-    dispatch(updateQuiz(quiz));
   }
 
   return (
@@ -200,7 +173,7 @@ export default function QuizDetailsEditor() {
                 type="date"
                 name="when_to_show"
                 defaultValue={new Date(quiz.when_to_show).toLocaleDateString('en-CA')}
-                onChange={(e) => { setUpdates({ ...updates, when_to_show: new Date(e.target.value) }); }} >
+                onChange={handleChange} >
               </Form.Control>
             </Col>
           </Form.Group>
@@ -275,7 +248,7 @@ export default function QuizDetailsEditor() {
                 type="date"
                 name="due_date"
                 defaultValue={new Date(quiz.due_date).toLocaleDateString('en-CA')}
-                onChange={(e) => { setUpdates({ ...updates, due_date: new Date(e.target.value) }); }} >
+                onChange={handleChange} >
               </Form.Control>
             </Col>
           </Form.Group>
@@ -289,7 +262,7 @@ export default function QuizDetailsEditor() {
                 type="date"
                 name="available_date"
                 defaultValue={new Date(quiz.available_date).toLocaleDateString('en-CA')}
-                onChange={(e) => { setUpdates({ ...updates, available_date: new Date(e.target.value) }); }} >
+                onChange={handleChange} >
               </Form.Control>
             </Col>
           </Form.Group>
@@ -303,14 +276,14 @@ export default function QuizDetailsEditor() {
                 type="date"
                 name="until_date"
                 defaultValue={new Date(quiz.until_date).toLocaleDateString('en-CA')}
-                onChange={(e) => { setUpdates({ ...updates, until_date: new Date(e.target.value) }); }} >
+                onChange={handleChange} >
               </Form.Control>
             </Col>
           </Form.Group>
 
           <hr />
 
-          <DetailsEditorControls updates={updates} updateQuiz={handleUpdate} />
+          <DetailsEditorControls updates={quiz} updateQuiz={handleUpdate} />
 
         </Form>
       }
