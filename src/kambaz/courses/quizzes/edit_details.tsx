@@ -4,8 +4,6 @@ import EditorComponent from "./wysiwyg_editor";
 import { useParams } from "react-router";
 import * as quizClient from "./client";
 import DetailsEditorControls from "./edit_details_controls";
-import { useDispatch } from "react-redux";
-import { updateQuiz } from "./reducer";
 
 export default function QuizDetailsEditor() {
   const { qid } = useParams();
@@ -34,8 +32,8 @@ export default function QuizDetailsEditor() {
     setQuiz({ ...quiz, description: body });
   }
 
-  const handleUpdate = async () => {
-    await quizClient.updateQuiz(quiz);
+  const handleUpdate = async (newQuiz: any) => {
+    await quizClient.updateQuiz(newQuiz);
   }
 
   return (
@@ -283,7 +281,15 @@ export default function QuizDetailsEditor() {
 
           <hr />
 
-          <DetailsEditorControls updates={quiz} updateQuiz={handleUpdate} />
+          <DetailsEditorControls
+            updates={quiz}
+            publish={(newQuiz) => {
+              console.log("howdy");
+              setQuiz(newQuiz);
+              console.log(newQuiz);
+              handleUpdate(newQuiz);
+            }}
+            updateQuiz={handleUpdate} />
 
         </Form>
       }

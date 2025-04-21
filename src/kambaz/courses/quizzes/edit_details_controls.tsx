@@ -1,17 +1,25 @@
 import { Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 
-export default function DetailsEditorControls({ updates, updateQuiz }:
-  { updates: any; updateQuiz: () => void; }) {
+export default function DetailsEditorControls({ updates, publish, updateQuiz }:
+  { updates: any; publish: (quiz: any) => void; updateQuiz: (quiz: any) => void; }) {
   const { cid, qid } = useParams();
 
   return (
     <div id="wd-quiz-editor-controls" className="text-nowrap">
+      <Link to={`/Kambaz/Courses/${cid}/Quizzes`}>
+        <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
+          onClick={() => {
+            publish({ ...updates, published: true });
+          }}
+        >
+          Save and Publish
+        </Button>
+      </Link>
       <Link to={`/Kambaz/Courses/${cid}/Quizzes/${qid}`}>
         <Button variant="danger" size="sm" className="me-1 float-end" id="wd-add-module-btn"
           onClick={() => {
-            updateQuiz();
-            console.log(updates);
+            updateQuiz(updates);
           }}
         >
           Save
