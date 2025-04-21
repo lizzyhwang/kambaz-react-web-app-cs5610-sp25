@@ -8,7 +8,6 @@ export default function QuizDetails() {
   const { qid } = useParams();
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const [quiz, setQuiz] = useState(quizzes.filter((q: any) => q._id === qid)[0]);
-  // const [quiz, setQuiz] = useState<any>(null);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const isFaculty = currentUser.role == "FACULTY";
 
@@ -17,6 +16,7 @@ export default function QuizDetails() {
       if (qid) {
         const data = await quizClient.findQuizById(qid);
         setQuiz(data);
+        console.log(data);
       }
     };
     fetchQuiz();
@@ -31,54 +31,59 @@ export default function QuizDetails() {
           {quiz?.title}
         </h2>
 
-        <table id="wd-quiz-details-table">
+        {quiz && <table id="wd-quiz-details-table">
           <tbody>
             <tr>
               <td className="wd-table" align="right"><b>Quiz Type</b></td>
-              <td>{quiz?.type}</td>
+              <td>{quiz.type}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Points</b></td>
-              <td>{quiz?.points}</td>
+              <td>{quiz.points}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Assignment Group</b></td>
-              <td>{quiz?.assignment_group}</td>
+              <td>{quiz.assignment_group}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Shuffle Answers</b></td>
-              <td>{quiz?.shuffle_answers ? "Yes" : "No"}</td>
+              <td>{quiz.shuffle_answers ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Time Limit</b></td>
-              <td>{quiz?.time_limit}</td>
+              <td>{quiz.time_limit}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Multiple Attempts</b></td>
-              <td>{quiz?.multiple_attempts ? "Yes" : "No"}</td>
+              <td>{quiz.multiple_attempts ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>View Responses</b></td>
-              <td>{quiz?.view_responses ? "Yes" : "No"}</td>
+              <td>{quiz.view_responses ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Show Correct Answers</b></td>
-              <td>{quiz?.show_correct_answers ? "Yes" : "No"}</td>
+              <td>{quiz.show_correct_answers ? "Yes" : "No"}</td>
+            </tr>
+            <tr>
+              <td className="wd-table" align="right"><b>Access Code</b></td>
+              <td>{quiz.access_code || "None"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>One Question At A Time</b></td>
-              <td>{quiz?.one_question_at_a_time ? "Yes" : "No"}</td>
+              <td>{quiz.one_question_at_a_time ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Webcam Required</b></td>
-              <td>{quiz?.webcame_required ? "Yes" : "No"}</td>
+              <td>{quiz.webcam_required ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Lock Questions After Answering</b></td>
-              <td>{quiz?.lock_questions_after_answering ? "Yes" : "No"}</td>
+              <td>{quiz.lock_after_answering ? "Yes" : "No"}</td>
             </tr>
           </tbody>
         </table>
+        }
         <br></br>
 
         <div className="mt-8">

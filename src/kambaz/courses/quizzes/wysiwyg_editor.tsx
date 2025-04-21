@@ -1,12 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
 
-export default function EditorComponent({ setInstructions }: { setInstructions: (body: string) => void; }) {
+export default function EditorComponent({ setInstructions, defaultBody }: { setInstructions: (body: string) => void; defaultBody: string }) {
   const editor = useRef(null);
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>(defaultBody);
 
   const config = useMemo(() => ({
-    readonly: false
+    readonly: false,
   }), []);
 
   return (
@@ -23,5 +23,3 @@ export default function EditorComponent({ setInstructions }: { setInstructions: 
     />
   );
 };
-
-// export default EditorComponent;

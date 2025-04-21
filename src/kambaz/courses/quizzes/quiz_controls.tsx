@@ -26,10 +26,8 @@ export default function QuizControls() {
       time_limit: 20,
       multiple_attempts: false,
       how_many_attempts: 1,
-      show_correct_answers: {
-        enabled: true,
-        when_to_show: null,
-      },
+      show_correct_answers: true,
+      when_to_show: null,
       access_code: "",
       one_question_at_a_time: true,
       webcam_required: false,
@@ -41,7 +39,7 @@ export default function QuizControls() {
     };
     if (cid) {
       const quiz = await coursesClient.createQuizForCourse(cid, dummy);
-      navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/edit`);
+      navigate(`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}`);
     } else {
       return;
     }
