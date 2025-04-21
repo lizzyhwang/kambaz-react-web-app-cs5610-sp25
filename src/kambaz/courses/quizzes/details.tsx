@@ -28,54 +28,54 @@ export default function QuizDetails() {
 
       <div id="wd-quiz-details" className="border-1">
         <h2>
-          {quiz.title}
+          {quiz?.title}
         </h2>
 
         <table id="wd-quiz-details-table">
           <tbody>
             <tr>
               <td className="wd-table" align="right"><b>Quiz Type</b></td>
-              <td>{quiz.type}</td>
+              <td>{quiz?.type}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Points</b></td>
-              <td>{quiz.points}</td>
+              <td>{quiz?.points}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Assignment Group</b></td>
-              <td>{quiz.assignment_group}</td>
+              <td>{quiz?.assignment_group}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Shuffle Answers</b></td>
-              <td>{quiz.shuffle_answers ? "Yes" : "No"}</td>
+              <td>{quiz?.shuffle_answers ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Time Limit</b></td>
-              <td>{quiz.time_limit}</td>
+              <td>{quiz?.time_limit}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Multiple Attempts</b></td>
-              <td>{quiz.multiple_attempts ? "Yes" : "No"}</td>
+              <td>{quiz?.multiple_attempts ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>View Responses</b></td>
-              <td>{quiz.view_responses ? "Yes" : "No"}</td>
+              <td>{quiz?.view_responses ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Show Correct Answers</b></td>
-              <td>{quiz.show_correct_answers ? "Yes" : "No"}</td>
+              <td>{quiz?.show_correct_answers ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>One Question At A Time</b></td>
-              <td>{quiz.one_question_at_a_time ? "Yes" : "No"}</td>
+              <td>{quiz?.one_question_at_a_time ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Webcam Required</b></td>
-              <td>{quiz.webcame_required ? "Yes" : "No"}</td>
+              <td>{quiz?.webcame_required ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td className="wd-table" align="right"><b>Lock Questions After Answering</b></td>
-              <td>{quiz.lock_questions_after_answering ? "Yes" : "No"}</td>
+              <td>{quiz?.lock_questions_after_answering ? "Yes" : "No"}</td>
             </tr>
           </tbody>
         </table>
@@ -93,10 +93,10 @@ export default function QuizDetails() {
             </thead>
             <tbody>
               <tr className="wd-quiz-summary-table">
-                <td className="wd-quiz-summary-table-cell">{new Date(quiz.due_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+                <td className="wd-quiz-summary-table-cell">{new Date(quiz?.due_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
                 <td className="wd-quiz-summary-table-cell">Everyone</td>
-                <td className="wd-quiz-summary-table-cell">{new Date(quiz.available_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
-                <td className="wd-quiz-summary-table-cell">{new Date(quiz.until_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+                <td className="wd-quiz-summary-table-cell">{new Date(quiz?.available_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
+                <td className="wd-quiz-summary-table-cell">{new Date(quiz?.until_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
               </tr>
             </tbody>
           </table>

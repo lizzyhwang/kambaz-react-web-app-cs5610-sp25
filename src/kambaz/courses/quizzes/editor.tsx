@@ -32,7 +32,7 @@ export default function QuizEditor() {
       className="mb-3"
     >
       <Tab eventKey="details" title="Details">
-        <QuizDetailsEditor quiz={quiz} />
+        <QuizDetailsEditor />
       </Tab>
       <Tab eventKey="questions" title="Questions">
         Tab content for Profile

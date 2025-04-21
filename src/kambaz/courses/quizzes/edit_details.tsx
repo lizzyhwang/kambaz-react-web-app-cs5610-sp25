@@ -1,31 +1,48 @@
-import { useState } from "react";
-import { Col, Form, FormControl, FormSelect, InputGroup, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 import EditorComponent from "./wysiwyg_editor";
+import { useParams } from "react-router";
+import * as quizClient from "./client";
 
-export default function QuizDetailsEditor({ quiz }: { quiz: any }) {
+export default function QuizDetailsEditor() {
+  const { qid } = useParams();
+  const [quiz, setQuiz] = useState<any>(null);
 
   const [updates, setUpdates] = useState<any>({
-    _id: quiz._id,
-    title: quiz.title,
-    description: quiz.description,
-    course: quiz.course,
-    type: quiz.type,
-    points: quiz.points,
-    assignment_group: quiz.assignment_group,
-    shuffle_answers: quiz.shuffle_answers,
-    time_limit: quiz.time_limit,
-    multiple_attempts: quiz.multiple_attempts,
-    how_many_attempts: quiz.how_many_attempts,
-    show_correct_answers: quiz.show_correct_answers,
-    access_code: quiz.access_code,
-    one_question_at_a_time: quiz.one_question_at_a_time,
-    webcam_required: quiz.webcam_required,
-    lock_after_answering: quiz.lock_after_answering,
-    due_date: quiz.due_date,
-    available_date: quiz.available_date,
-    until_date: quiz.until_date,
-    published: quiz.published,
+    _id: quiz?._id,
+    title: quiz?.title,
+    description: quiz?.description,
+    course: quiz?.course,
+    type: quiz?.type,
+    points: quiz?.points,
+    assignment_group: quiz?.assignment_group,
+    shuffle_answers: quiz?.shuffle_answers,
+    time_limit: quiz?.time_limit,
+    multiple_attempts: quiz?.multiple_attempts,
+    how_many_attempts: quiz?.how_many_attempts,
+    show_correct_answers: quiz?.show_correct_answers,
+    access_code: quiz?.access_code,
+    one_question_at_a_time: quiz?.one_question_at_a_time,
+    webcam_required: quiz?.webcam_required,
+    lock_after_answering: quiz?.lock_after_answering,
+    due_date: quiz?.due_date,
+    available_date: quiz?.available_date,
+    until_date: quiz?.until_date,
+    published: quiz?.published,
   })
+
+  const fetchQuiz = async () => {
+    if (!qid) {
+      return;
+    }
+    const quiz = await quizClient.findQuizById(qid);
+    setQuiz(quiz);
+  }
+
+  useEffect(() => {
+    fetchQuiz();
+  }, [qid]);
+
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
@@ -44,7 +61,7 @@ export default function QuizDetailsEditor({ quiz }: { quiz: any }) {
           <Form.Control
             type="text"
             name="title"
-            defaultValue={quiz.title}
+            defaultValue={quiz?.title}
             onChange={handleChange}
           />
         </Form.Group>
