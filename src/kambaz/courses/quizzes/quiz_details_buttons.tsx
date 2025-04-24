@@ -8,7 +8,8 @@ export default function QuizDetailsButtons() {
 
   return (
     <div className="d-flex justify-content-center">
-      <Button className="btn-secondary m-1">
+      <Button className="btn-secondary m-1"
+        onClick={() => navigate(`/Kambaz/Courses/${cid}/Quizzes/${qid}/preview`)}>
         Preview
       </Button>
       <Button className="btn-secondary m-1"

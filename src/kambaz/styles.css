@@ -136,3 +136,37 @@ body * {
 .nav-tabs .nav-link:not(.active):hover {
   color: darkred;
 }
+
+.question-box {
+  border: 1px solid lightgray;
+  margin: 20px;
+}
+
+.question-title {
+  background-color: #f1f1f1;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 8px;
+  border: 1px solid lightgray;
+}
+
+.question-question {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.question-choices-box {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.question-nav-buttons {
+  margin: 20px;
+}
+
+.small-margin {
+  margin: 10px;
+}

@@ -18,3 +18,13 @@ export const updateQuiz = async (quiz: any) => {
   const { data } = await axiosWithCredentials.put(`${QUIZZES_API}/${quiz._id}`, quiz);
   return data;
 };
+
+export const findQuestionsForQuiz = async (qid: string) => {
+  const response = await axios.get(`${QUIZZES_API}/${qid}/questions`);
+  return response.data;
+}
+
+export const createQuestionForQuiz = async (qid: string, question: any) => {
+  const response = await axiosWithCredentials.post(`${QUIZZES_API}/${qid}/questions`, question);
+  return response.data;
+}
