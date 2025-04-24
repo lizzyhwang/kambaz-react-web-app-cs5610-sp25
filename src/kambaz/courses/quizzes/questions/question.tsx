@@ -8,6 +8,7 @@ import SaveQuestionFooter from './save_question_footer';
 import * as questionsClient from "./client";
 import { PiPlus } from 'react-icons/pi';
 import React from 'react';
+import { FaTrash } from 'react-icons/fa';
 
 export default function Question({ question, index, setQuestions }:
   { question: any; index: number; setQuestions: (questions: any) => void }) {
@@ -54,6 +55,18 @@ export default function Question({ question, index, setQuestions }:
       };
     });
   }
+
+  const handleRemoveChoice = (indexToDelete: number) => {
+    setNewQuestion((prevQuestion: { choices: any; }) => {
+      const updatedChoices = [...prevQuestion.choices];
+      updatedChoices.splice(indexToDelete, 1);
+
+      return {
+        ...prevQuestion,
+        choices: updatedChoices
+      };
+    });
+  };
 
   const questionQuestion = {
     __html: question?.question
@@ -151,23 +164,28 @@ export default function Question({ question, index, setQuestions }:
                   <React.Fragment key={index}>
                     {
                       newQuestion.type == 0 &&
-                      (<div className="d-flex align-items-center">
-                        <Form.Check
-                          type="radio"
-                          name="solution"
-                          className="tiny-margin"
-                          checked={newQuestion.answer === choice}
-                          onChange={() => setNewQuestion({ ...newQuestion, answer: choice })}
-                        />
-                        <Form.Control
-                          type="text"
-                          value={choice}
-                          className="tiny-margin"
-                          placeholder="Enter Option"
-                          onChange={(e) => { handleEditChoice(e.target.value, index) }}
-                        />
-                      </div>)
-
+                      (
+                        <div className="d-flex align-items-center">
+                          <Form.Check
+                            type="radio"
+                            name="solution"
+                            className="tiny-margin"
+                            checked={newQuestion.answer === choice}
+                            onChange={() => setNewQuestion({ ...newQuestion, answer: choice })}
+                          />
+                          <Form.Control
+                            type="text"
+                            value={choice}
+                            className="tiny-margin"
+                            placeholder="Enter Option"
+                            onChange={(e) => { handleEditChoice(e.target.value, index) }}
+                          />
+                          <button className="transparent-add-option-button"
+                            onClick={() => { handleRemoveChoice(index) }}>
+                            <FaTrash />
+                          </button>
+                        </div>
+                      )
                     }
                     {
                       newQuestion.type == 1 &&
@@ -183,9 +201,13 @@ export default function Question({ question, index, setQuestions }:
                     }
                     {
                       newQuestion.type == 2 &&
-                      (<div>
+                      (<div className="d-flex align-items-center">
                         <Form.Control className="small-margin" type="email" value={choice} placeholder="Enter Option"
                           onChange={(e) => { handleEditChoice(e.target.value, index) }} />
+                        <button className="transparent-add-option-button"
+                          onClick={() => { handleRemoveChoice(index) }}>
+                          <FaTrash />
+                        </button>
                       </div>)
                     }
                   </React.Fragment>
