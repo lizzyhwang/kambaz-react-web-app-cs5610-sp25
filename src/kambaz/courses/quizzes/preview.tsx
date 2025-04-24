@@ -3,13 +3,11 @@ import { BsExclamationCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import * as quizClient from "./client";
-import MultipleChoiceQuestion from "./questions/multiple_choice_question";
-import TrueFalseQuestion from "./questions/true_false_question";
-import FillInBlanksQuestion from "./questions/fill_in_the_blanks_question";
 import QuestionFooter from "./questions/question_footer";
 import SwitchQuestionButtons from "./questions/switch_question_buttons";
 import { Button } from "react-bootstrap";
 import { FaPencil } from "react-icons/fa6";
+import Question from "./questions/question";
 
 export default function QuizPreview() {
   const { cid, qid } = useParams();
@@ -41,17 +39,6 @@ export default function QuizPreview() {
     __html: quiz?.description
   };
 
-  const renderQuestionByType = (question: any, idx: number) => {
-    switch (question.type) {
-      case 0:
-        return <MultipleChoiceQuestion question={question} index={idx} />;
-      case 1:
-        return <TrueFalseQuestion question={question} index={idx} />;
-      case 2:
-        return <FillInBlanksQuestion question={question} index={idx} />;
-    }
-  }
-
   return (
     <div id="wd-quiz-preview">
       <div className="d-flex justify-content-between">
@@ -77,7 +64,7 @@ export default function QuizPreview() {
 
       <hr></hr>
 
-      {questions && (renderQuestionByType(questions[curQuestion], curQuestion + 1))}
+      {questions && <Question question={questions[curQuestion]} index={curQuestion + 1} setQuestions={setQuestions} />}
 
       <SwitchQuestionButtons curQuestion={curQuestion} setCurQuestion={setCurQuestion} numQuestions={questions?.length} />
       <QuestionFooter />

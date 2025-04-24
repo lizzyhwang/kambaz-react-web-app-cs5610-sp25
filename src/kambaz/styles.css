@@ -170,3 +170,13 @@ body * {
 .small-margin {
   margin: 10px;
 }
+
+.transparent-edit-button {
+  background-color: transparent;
+  border: 0px;
+}
+
+.transparent-edit-button:hover {
+  color: #DC3546;
+  cursor: pointer;
+}
