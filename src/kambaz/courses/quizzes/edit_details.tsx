@@ -284,9 +284,7 @@ export default function QuizDetailsEditor() {
           <DetailsEditorControls
             updates={quiz}
             publish={(newQuiz) => {
-              console.log("howdy");
               setQuiz(newQuiz);
-              console.log(newQuiz);
               handleUpdate(newQuiz);
             }}
             updateQuiz={handleUpdate} />

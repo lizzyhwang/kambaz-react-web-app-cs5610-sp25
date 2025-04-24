@@ -72,7 +72,6 @@ export default function Question({ question, index, setQuestions }:
                   title="Edit Question"
                   onClick={() => {
                     setIsEditing(true);
-                    console.log(newQuestion);
                   }}>
                   <FaPencil />
                 </button>}
@@ -141,7 +140,6 @@ export default function Question({ question, index, setQuestions }:
             <EditorComponent
               setInstructions={(newQues: string) => {
                 setNewQuestion({ ...newQuestion, question: newQues });
-                console.log(newQuestion);
               }}
               defaultBody={newQuestion.question} />
           </div>

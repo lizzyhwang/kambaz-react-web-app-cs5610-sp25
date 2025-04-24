@@ -28,7 +28,6 @@ export default function QuizPreview() {
       if (qid) {
         const data = await quizClient.findQuestionsForQuiz(qid);
         setQuestions(data);
-        console.log(questions);
       }
     }
     fetchQuiz();

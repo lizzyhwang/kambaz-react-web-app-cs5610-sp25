@@ -67,7 +67,6 @@ export default function Kambaz() {
   };
 
   const updateCourse = async (course: any) => {
-    console.log('hi');
     await courseClient.updateCourse(course);
     setCourses(courses.map((c) => {
       if (c._id === course._id) { return course; }

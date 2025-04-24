@@ -25,8 +25,6 @@ export default function Assignments() {
     fetchAssignments();
   }, [cid]);
 
-  // console.log(assignments);
-
   return (
     <div id="wd-assignments">
       {isFaculty &&
