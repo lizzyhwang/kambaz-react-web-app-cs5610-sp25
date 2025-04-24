@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { FaPencil } from 'react-icons/fa6';
 import { useLocation } from 'react-router';
 import EditorComponent from '../wysiwyg_editor';
 import SaveQuestionFooter from './save_question_footer';
 import * as questionsClient from "./client";
+import { PiPlus } from 'react-icons/pi';
+import React from 'react';
 
 export default function Question({ question, index, setQuestions }:
   { question: any; index: number; setQuestions: (questions: any) => void }) {
@@ -38,6 +40,21 @@ export default function Question({ question, index, setQuestions }:
     setIsEditing(false);
   };
 
+  const handleEditChoice = (newChoice: string, index: any) => {
+    setNewQuestion((prevNewQuestion: { choices: any; }) => {
+      const updatedChoices = [...prevNewQuestion.choices];
+      if (index < newQuestion.choices.length) {
+        updatedChoices[index] = newChoice;
+      } else {
+        updatedChoices.push(newChoice);
+      }
+      return {
+        ...prevNewQuestion,
+        choices: updatedChoices
+      };
+    });
+  }
+
   const questionQuestion = {
     __html: question?.question
   };
@@ -55,6 +72,7 @@ export default function Question({ question, index, setQuestions }:
                   title="Edit Question"
                   onClick={() => {
                     setIsEditing(true);
+                    console.log(newQuestion);
                   }}>
                   <FaPencil />
                 </button>}
@@ -69,7 +87,7 @@ export default function Question({ question, index, setQuestions }:
           </div>
           }
           <div className="question-choices-box">
-            {question.choices && question.choices.map((choice: any) => (
+            {question.type != 2 && question.choices && question.choices.map((choice: any) => (
               <div>
                 <hr />
                 <Form.Check
@@ -81,8 +99,10 @@ export default function Question({ question, index, setQuestions }:
             ))}
           </div>
         </div>
-        )}
-      {isEditing &&
+        )
+      }
+      {
+        isEditing &&
         <div className="question-box border-1">
           <div>
             <Row>
@@ -93,7 +113,13 @@ export default function Question({ question, index, setQuestions }:
                   <Form.Select
                     id="wd-select-question-type"
                     value={newQuestion.type}
-                    onChange={(e) => { setNewQuestion({ ...newQuestion, type: parseInt(e.target.value) }) }}
+                    onChange={(e) => {
+                      setNewQuestion({
+                        ...newQuestion,
+                        type: parseInt(e.target.value),
+                        choices: parseInt(e.target.value) == 1 ? ["True", "False"] : [""]
+                      });
+                    }}
                   >
                     <option value="0">Multiple Choice</option>
                     <option value="1">True/False</option>
@@ -122,18 +148,61 @@ export default function Question({ question, index, setQuestions }:
           <div className="small-margin">
             <h5>Answers:</h5>
             <div className="question-choices-box">
-              {question.choices && question.choices.map((choice: any) => (
-                <div>
-                  <Form.Check
-                    type="radio"
-                    name="solution"
-                    label={choice}
-                    checked={newQuestion.isTrue === (choice === "True")}
-                    onClick={() => setNewQuestion({ ...newQuestion, isTrue: choice === "True" })}
-                  />
-                </div>
-              ))}
+              {newQuestion.choices && newQuestion.choices.map((choice: any, index: number) => {
+                return (
+                  <React.Fragment key={index}>
+                    {
+                      newQuestion.type == 0 &&
+                      (<div className="d-flex align-items-center">
+                        <Form.Check
+                          type="radio"
+                          name="solution"
+                          className="tiny-margin"
+                          // label={choice}
+                          checked={newQuestion.answer === choice}
+                          onChange={() => setNewQuestion({ ...newQuestion, answer: choice })}
+                        />
+                        <Form.Control
+                          type="text"
+                          value={choice}
+                          className="tiny-margin"
+                          placeholder="Enter Option"
+                          onChange={(e) => { handleEditChoice(e.target.value, index) }}
+                        />
+                      </div>)
+
+                    }
+                    {
+                      newQuestion.type == 1 &&
+                      (<div>
+                        <Form.Check
+                          type="radio"
+                          name="solution"
+                          label={choice}
+                          checked={newQuestion.isTrue === (choice === "True")}
+                          onChange={() => setNewQuestion({ ...newQuestion, isTrue: choice === "True" })}
+                        />
+                      </div>)
+                    }
+                    {
+                      newQuestion.type == 2 &&
+                      (<div>
+                        <Form.Control className="small-margin" type="email" value={choice} placeholder="Enter Option"
+                          onChange={(e) => { handleEditChoice(e.target.value, index) }} />
+                      </div>)
+                    }
+                  </React.Fragment>
+                );
+              }
+              )}
             </div>
+            {(newQuestion.type == 0 || newQuestion.type == 2) &&
+              (<button className="float-end transparent-add-option-button"
+                onClick={() => { handleEditChoice("", newQuestion.choices.length) }}>
+                <PiPlus />
+                Add Another Answer
+              </button>)
+            }
           </div>
           <SaveQuestionFooter updateQuestion={updateQuestion} handleCancel={handleCancel} />
 

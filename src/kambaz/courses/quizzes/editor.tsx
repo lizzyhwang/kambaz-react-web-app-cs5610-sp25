@@ -38,7 +38,6 @@ export default function QuizEditor() {
   }, [qid]);
 
   const handleUpdateQuestions = async () => {
-    console.log("updating...");
     await questions.map(async (question: any) => (
       await questionClient.updateQuestion(question)
     ))
