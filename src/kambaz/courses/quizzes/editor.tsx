@@ -43,6 +43,13 @@ export default function QuizEditor() {
     ))
   }
 
+  const handleNewQuestion = async () => {
+    if (qid) {
+      await quizClient.createQuestionForQuiz(qid, {});
+    }
+    fetchQuestions();
+  }
+
   return (
     <Tabs
       defaultActiveKey="details"
@@ -54,7 +61,8 @@ export default function QuizEditor() {
       </Tab>
       <Tab eventKey="questions" title="Questions">
         <div className="d-flex justify-content-center align-items-center">
-          <Button className="btn btn-secondary">
+          <Button className="btn btn-secondary"
+            onClick={handleNewQuestion}>
             <PiPlus className="me-2" />
             New Question
           </Button>

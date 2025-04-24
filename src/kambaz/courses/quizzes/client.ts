@@ -25,6 +25,7 @@ export const findQuestionsForQuiz = async (qid: string) => {
 }
 
 export const createQuestionForQuiz = async (qid: string, question: any) => {
+  console.log("howdy");
   const response = await axiosWithCredentials.post(`${QUIZZES_API}/${qid}/questions`, question);
   return response.data;
 }
