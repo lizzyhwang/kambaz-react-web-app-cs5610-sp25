@@ -50,32 +50,39 @@ export default function QuizEditor() {
     fetchQuestions();
   }
 
+  const totalPoints = () => {
+    return questions?.reduce((total: any, question: { points: any; }) => total + (question.points || 0), 0);
+  }
+
   return (
-    <Tabs
-      defaultActiveKey="details"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="details" title="Details">
-        <QuizDetailsEditor />
-      </Tab>
-      <Tab eventKey="questions" title="Questions">
-        <div className="d-flex justify-content-center align-items-center">
-          <Button className="btn btn-secondary"
-            onClick={handleNewQuestion}>
-            <PiPlus className="me-2" />
-            New Question
-          </Button>
-        </div>
-        {questions && (
-          questions.map((question: any, index: number) => (
-            <Question question={question} index={index + 1} setQuestions={setQuestions} />
-          ))
-        )}
-        <QuestionsEditorControls
-          updates={questions}
-          updateQuestions={handleUpdateQuestions} />
-      </Tab>
-    </Tabs>
+    <div>
+      <h5 className="d-flex justify-content-end">Points: {totalPoints()}</h5>
+      <Tabs
+        defaultActiveKey="details"
+        id="uncontrolled-tab-example"
+        className="mb-3"
+      >
+        <Tab eventKey="details" title="Details">
+          <QuizDetailsEditor />
+        </Tab>
+        <Tab eventKey="questions" title="Questions">
+          <div className="d-flex justify-content-center align-items-center">
+            <Button className="btn btn-secondary"
+              onClick={handleNewQuestion}>
+              <PiPlus className="me-2" />
+              New Question
+            </Button>
+          </div>
+          {questions && (
+            questions.map((question: any, index: number) => (
+              <Question question={question} index={index + 1} setQuestions={setQuestions} />
+            ))
+          )}
+          <QuestionsEditorControls
+            updates={questions}
+            updateQuestions={handleUpdateQuestions} />
+        </Tab>
+      </Tabs>
+    </div>
   );
 }

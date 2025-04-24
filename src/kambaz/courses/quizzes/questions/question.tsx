@@ -13,7 +13,7 @@ export default function Question({ question, index, setQuestions }:
   { question: any; index: number; setQuestions: (questions: any) => void }) {
   const { pathname } = useLocation();
   const isPreview = pathname.includes("preview");
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(isPreview ? false : true);
   const [newQuestion, setNewQuestion] = useState(question);
 
   const handleChange = (e: any) => {
@@ -156,7 +156,6 @@ export default function Question({ question, index, setQuestions }:
                           type="radio"
                           name="solution"
                           className="tiny-margin"
-                          // label={choice}
                           checked={newQuestion.answer === choice}
                           onChange={() => setNewQuestion({ ...newQuestion, answer: choice })}
                         />
